@@ -1,12 +1,12 @@
 extends RigidBody2D
 
 
-var drift_factor: float = 0
+var drift_factor: float = 0.8
 
 var is_braking: bool = false
 
-var turn_acceleration: float = 0.4
-var max_turn_speed: float = 5
+var turn_acceleration: float = 0.3
+var max_turn_speed: float = 3
 
 var forward_acceleration: float = 800
 var back_acceleration: float = 500
