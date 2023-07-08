@@ -106,7 +106,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			%Door.play()
 	
 	last_linear_velocity = state.linear_velocity
-	print("l: ", linear_velocity.length())
+#	print("l: ", linear_velocity.length())
 #	print("a: ", angular_velocity)
 
 
