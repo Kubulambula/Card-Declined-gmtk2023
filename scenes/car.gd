@@ -2,6 +2,7 @@ extends RigidBody2D
 
 @onready var tiremark1 = %TireMark1
 @onready var tiremark2 = %TireMark2
+@onready var smoke = %Smoke
 
 var max_point_count: int = 250
 
@@ -50,6 +51,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	
 	tiremark1.emitting = is_drifting()
 	tiremark2.emitting = is_drifting()
+	smoke.emitting = is_drifting()
+	
 	
 #	print(linear_velocity.length())
 

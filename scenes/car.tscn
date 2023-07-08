@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dy4p27it41a4c"]
+[gd_scene load_steps=11 format=3 uid="uid://dy4p27it41a4c"]
 
 [ext_resource type="Script" path="res://scenes/car.gd" id="1_na8kg"]
 [ext_resource type="Texture2D" uid="uid://c413w5irodrag" path="res://assets/cars/ambulance.png" id="2_2d8d2"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_ao7sn"]
-[ext_resource type="Texture2D" uid="uid://ccs40mnupg30b" path="res://icon.svg" id="4_e2rst"]
+[ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
+[ext_resource type="Texture2D" uid="uid://owk203cxcnf6" path="res://assets/particles/smoke.png" id="6_pue5m"]
 
 [sub_resource type="Animation" id="Animation_15ohu"]
 length = 0.001
@@ -119,27 +120,33 @@ editor_draw_drag_margin = true
 
 [node name="TireMark1" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-35, 60)
+position = Vector2(-25, 60)
 emitting = false
 amount = 256
 lifetime = 12.0
-texture = ExtResource("4_e2rst")
+texture = ExtResource("4_o8cd0")
 particle_flag_align_y = true
 gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_okphn")
 
 [node name="TireMark2" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
-visible = false
+position = Vector2(25, 60)
 emitting = false
 amount = 256
-lifetime = 10.0
-texture = ExtResource("4_e2rst")
+lifetime = 12.0
+texture = ExtResource("4_o8cd0")
 particle_flag_align_y = true
 gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_okphn")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-visible = false
+[node name="Smoke" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 65)
+emitting = false
 amount = 64
 lifetime = 4.0
+texture = ExtResource("6_pue5m")
+emission_shape = 1
+emission_sphere_radius = 5.0
 gravity = Vector2(0, 0)
