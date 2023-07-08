@@ -95,7 +95,7 @@ func _on_car_door_area_area_exited(area: Area2D) -> void:
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkh63"]
-radius = 40.0
+radius = 30.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tnhax"]
 radius = 50.0

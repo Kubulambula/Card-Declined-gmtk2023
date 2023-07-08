@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=3 uid="uid://dystqppev317t"]
+
+[ext_resource type="Script" path="res://scenes/object/npc.gd" id="1_mw1jx"]
+[ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="1_tks4l"]
+[ext_resource type="Texture2D" uid="uid://cyiwjmd2l0qqg" path="res://assets/player/player_legs.png" id="2_rs07j"]
+[ext_resource type="Texture2D" uid="uid://3tn7vyjkl014" path="res://assets/player/player_body.png" id="3_uigy1"]
+[ext_resource type="Texture2D" uid="uid://vew1bsefrtwu" path="res://assets/player/player_head.png" id="4_rhkfn"]
+
+[sub_resource type="Animation" id="Animation_mjev8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/LegL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-30, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/LegR:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_2wk8n"]
+resource_name = "walking"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/LegL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-30, -30), Vector2(-30, 30), Vector2(-30, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/LegR:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(30, 30), Vector2(30, -30), Vector2(30, 30)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.261799, -0.261799]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6dx6"]
+_data = {
+"RESET": SubResource("Animation_mjev8"),
+"walking": SubResource("Animation_2wk8n")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pqe24"]
+radius = 20.0
+
+[node name="NavNPC" type="CharacterBody2D"]
+script = ExtResource("1_mw1jx")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+debug_enabled = true
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.7, 0.7)
+
+[node name="Shadow" type="Sprite2D" parent="Node2D"]
+modulate = Color(0.0862745, 0.0823529, 0.329412, 0.498039)
+scale = Vector2(2, 2)
+texture = ExtResource("1_tks4l")
+
+[node name="LegL" type="Sprite2D" parent="Node2D"]
+position = Vector2(-30, 0)
+texture = ExtResource("2_rs07j")
+
+[node name="LegR" type="Sprite2D" parent="Node2D"]
+position = Vector2(30, 0)
+texture = ExtResource("2_rs07j")
+
+[node name="Body" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("3_uigy1")
+
+[node name="Head" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("4_rhkfn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h6dx6")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pqe24")
+
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

@@ -44,7 +44,7 @@ var slow_turn_acceleration: float = 0.15
 var max_turn_speed: float = 4
 
 var forward_acceleration: float = 1100
-var max_forward_speed: float = 950
+var max_forward_speed: float = 1000
 var max_back_speed: float = 400
 
 var last_linear_velocity: Vector2 = Vector2.ZERO
