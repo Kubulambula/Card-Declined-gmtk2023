@@ -12,8 +12,11 @@ var inside_car: bool = false
 
 
 func _physics_process(delta: float) -> void:
+	look_at(get_global_mouse_position())
+	
 	if inside_car:
 		return
+	
 	var direction := Input.get_vector("left", "right", "forward", "back")
 	if direction:
 		$AnimationPlayer.play("walking")
@@ -26,14 +29,12 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity = Vector2.ZERO
 	
-	look_at(get_global_mouse_position())
 	
 	move_and_slide()
 
 
 func _input(event: InputEvent) -> void:
 	if can_get_in_car and Input.is_action_just_pressed("e"):
-		print("aaa")
 		if inside_car:
 			get_out()
 		else:
