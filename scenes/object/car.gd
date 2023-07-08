@@ -39,6 +39,7 @@ var last_linear_velocity: Vector2 = Vector2.ZERO
 
 var max_speed: float = max_forward_speed
 @onready var lights = $Sprite2D/AnimationPlayer
+@onready var lights2 = $AnimationPlayer2
 
 var input: Vector2 = Vector2.ZERO
 
@@ -61,9 +62,11 @@ func _input(event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_Q):
 		if lights.is_playing():
 			lights.play("RESET")
+			lights2.play("RESET")
 			$Siren.playing = false
 		else:
 			lights.play("flash")
+			lights2.play("WEE_WOO")
 			$Siren.playing = true
 
 
