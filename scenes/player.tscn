@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdfffi0qduyfu"]
+[gd_scene load_steps=11 format=3 uid="uid://bdfffi0qduyfu"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_2mfsv"]
-[ext_resource type="Texture2D" uid="uid://ccs40mnupg30b" path="res://icon.svg" id="2_lbt1m"]
+[ext_resource type="Texture2D" uid="uid://cyiwjmd2l0qqg" path="res://assets/player/player_legs.png" id="2_ncu2s"]
+[ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="2_skm2p"]
+[ext_resource type="Texture2D" uid="uid://3tn7vyjkl014" path="res://assets/player/player_body.png" id="3_r47n1"]
+[ext_resource type="Texture2D" uid="uid://vew1bsefrtwu" path="res://assets/player/player_head.png" id="4_dwe64"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkh63"]
 radius = 60.0
@@ -9,11 +12,116 @@ radius = 60.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tnhax"]
 radius = 50.0
 
+[sub_resource type="Animation" id="Animation_2wk8n"]
+resource_name = "walking"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/LegL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-30, -30), Vector2(-30, 30), Vector2(-30, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/LegR:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(30, 30), Vector2(30, -30), Vector2(30, 30)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.261799, -0.261799]
+}
+
+[sub_resource type="Animation" id="Animation_mjev8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/LegL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-30, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/LegR:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6dx6"]
+_data = {
+"RESET": SubResource("Animation_mjev8"),
+"walking": SubResource("Animation_2wk8n")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_2mfsv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_lbt1m")
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(0.7, 0.7)
+
+[node name="Shadow" type="Sprite2D" parent="Node2D"]
+modulate = Color(0.0862745, 0.0823529, 0.329412, 0.498039)
+scale = Vector2(2, 2)
+texture = ExtResource("2_skm2p")
+
+[node name="LegL" type="Sprite2D" parent="Node2D"]
+position = Vector2(-30, 0)
+texture = ExtResource("2_ncu2s")
+
+[node name="LegR" type="Sprite2D" parent="Node2D"]
+position = Vector2(30, 0)
+texture = ExtResource("2_ncu2s")
+
+[node name="Body" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("3_r47n1")
+
+[node name="Head" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("4_dwe64")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hkh63")
@@ -32,6 +140,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CarDoorArea"]
 shape = SubResource("CircleShape2D_tnhax")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h6dx6")
+}
 
 [connection signal="area_entered" from="CarDoorArea" to="." method="_on_car_door_area_area_entered"]
 [connection signal="area_exited" from="CarDoorArea" to="." method="_on_car_door_area_area_exited"]
