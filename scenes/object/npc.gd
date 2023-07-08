@@ -9,8 +9,8 @@ var turn_speed: float = 8
 
 
 func _ready() -> void:
-	global_position = Global.get_random_poi
-	set_target(Global.get_random_poi)
+	global_position = Global.get_random_poi()
+	set_target(Global.get_random_poi())
 	set_physics_process(false)
 	agent.set_navigation_map(tilemap)
 	await get_tree().create_timer(1).timeout
@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		velocity = direction.normalized() * walk_speed
 		move_and_slide()
 	else:
-		set_target(Global.get_random_poi)
+		set_target(Global.get_random_poi())
 
 
 func _on_navigation_agent_2d_target_reached() -> void:
