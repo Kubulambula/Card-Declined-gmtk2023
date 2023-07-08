@@ -1,10 +1,98 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdfffi0qduyfu"]
+[gd_scene load_steps=11 format=3 uid="uid://dx7abmjmrkhuu"]
 
-[ext_resource type="Script" path="res://scenes/objects/player.gd" id="1_ai1a6"]
-[ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="2_7ampr"]
-[ext_resource type="Texture2D" uid="uid://cyiwjmd2l0qqg" path="res://assets/player/player_legs.png" id="3_ciufm"]
-[ext_resource type="Texture2D" uid="uid://3tn7vyjkl014" path="res://assets/player/player_body.png" id="4_oq15m"]
-[ext_resource type="Texture2D" uid="uid://vew1bsefrtwu" path="res://assets/player/player_head.png" id="5_33rnl"]
+[ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="1_iry73"]
+[ext_resource type="Texture2D" uid="uid://cyiwjmd2l0qqg" path="res://assets/player/player_legs.png" id="2_fweob"]
+[ext_resource type="Texture2D" uid="uid://3tn7vyjkl014" path="res://assets/player/player_body.png" id="3_n3sf0"]
+[ext_resource type="Texture2D" uid="uid://vew1bsefrtwu" path="res://assets/player/player_head.png" id="4_njemo"]
+
+[sub_resource type="GDScript" id="GDScript_mafc8"]
+script/source = "extends CharacterBody2D
+
+
+var max_speed = 400.0
+var acceleration = 4000
+var friction = 2500
+
+var can_get_in_car: bool = false
+var inside_car: bool = false
+
+@onready var world = get_parent()
+
+func _init() -> void:
+	Global.player = self
+
+
+func _physics_process(delta: float) -> void:
+	look_at(get_global_mouse_position())
+	
+	if inside_car:
+		return
+	
+	var direction := Input.get_vector(\"left\", \"right\", \"forward\", \"back\")
+	if direction:
+		$AnimationPlayer.play(\"walking\")
+		velocity += direction * acceleration * delta
+		velocity = velocity.limit_length(max_speed)
+	else:
+		$AnimationPlayer.play(\"RESET\")
+		if velocity.length() > (friction * delta):
+			velocity -= velocity.normalized() * friction * delta
+		else:
+			velocity = Vector2.ZERO
+	
+	
+	move_and_slide()
+
+
+func _input(event: InputEvent) -> void:
+	if can_get_in_car and Input.is_action_just_pressed(\"e\"):
+		if inside_car:
+			get_out()
+		else:
+			get_in()
+
+
+func get_in() -> void:
+	$CollisionShape2D.disabled = true
+	var area = $CarDoorArea.get_overlapping_areas()[0]
+	world.call_deferred(\"remove_child\", self)
+	area.call_deferred(\"add_child\", self)
+	position = Vector2.ZERO
+	
+	inside_car = true
+	visible = false
+#	await get_tree().create_timer(0.2).timeout
+	area.get_parent().can_drive = true
+
+
+func get_out() -> void:
+	var area = $CarDoorArea.get_overlapping_areas()[0]
+	var car = area.get_parent()
+	car.stop_now()
+	await car.stopped
+	
+	$Camera2D.position_smoothing_enabled = false
+	
+	area.call_deferred(\"remove_child\", self)
+	world.call_deferred(\"add_child\", self)
+	set_deferred(\"global_position\", area.get_node(\"GetOutPosition\").global_position)
+	
+	inside_car = false
+	visible = true
+	$CollisionShape2D.set_deferred(\"disabled\", false)
+	
+	await get_tree().create_timer(0.1).timeout
+	$Camera2D.position_smoothing_enabled = true
+	
+
+
+func _on_car_door_area_area_entered(area: Area2D) -> void:
+	can_get_in_car = true
+
+
+func _on_car_door_area_area_exited(area: Area2D) -> void:
+	can_get_in_car = false
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkh63"]
 radius = 40.0
@@ -99,7 +187,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_ai1a6")
+script = SubResource("GDScript_mafc8")
 
 [node name="Node2D" type="Node2D" parent="."]
 rotation = 1.5708
@@ -108,21 +196,21 @@ scale = Vector2(0.7, 0.7)
 [node name="Shadow" type="Sprite2D" parent="Node2D"]
 modulate = Color(0.0862745, 0.0823529, 0.329412, 0.498039)
 scale = Vector2(2, 2)
-texture = ExtResource("2_7ampr")
+texture = ExtResource("1_iry73")
 
 [node name="LegL" type="Sprite2D" parent="Node2D"]
 position = Vector2(-30, 0)
-texture = ExtResource("3_ciufm")
+texture = ExtResource("2_fweob")
 
 [node name="LegR" type="Sprite2D" parent="Node2D"]
 position = Vector2(30, 0)
-texture = ExtResource("3_ciufm")
+texture = ExtResource("2_fweob")
 
 [node name="Body" type="Sprite2D" parent="Node2D"]
-texture = ExtResource("4_oq15m")
+texture = ExtResource("3_n3sf0")
 
 [node name="Head" type="Sprite2D" parent="Node2D"]
-texture = ExtResource("5_33rnl")
+texture = ExtResource("4_njemo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hkh63")
