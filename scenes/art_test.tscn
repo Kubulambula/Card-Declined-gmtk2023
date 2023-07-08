@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://3u5dup7nlt8m"]
+[gd_scene load_steps=7 format=3 uid="uid://3u5dup7nlt8m"]
 
 [ext_resource type="TileSet" uid="uid://bsig7dbfg8l6e" path="res://assets/tilemaps/test.tres" id="1_nqnne"]
 [ext_resource type="Texture2D" uid="uid://cowb2h0uoohvn" path="res://assets/tilemaps/test_tilemap.png" id="2_1dtur"]
 [ext_resource type="PackedScene" uid="uid://dy4p27it41a4c" path="res://scenes/car.tscn" id="2_f1n37"]
+[ext_resource type="PackedScene" uid="uid://bdfffi0qduyfu" path="res://scenes/player.tscn" id="4_qpk8s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5jvb"]
 texture = ExtResource("2_1dtur")
@@ -88,3 +89,6 @@ layer_0/tile_data = PackedInt32Array(-196611, 655366, 0, -131075, 655366, 1, -19
 
 [node name="Node2D" parent="." instance=ExtResource("2_f1n37")]
 position = Vector2(493, -25)
+
+[node name="Player" parent="." instance=ExtResource("4_qpk8s")]
+position = Vector2(268, -40)

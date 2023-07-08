@@ -1,11 +1,17 @@
 extends RigidBody2D
 
+signal stopped
+
 @onready var tiremark1 = %TireMark1
 @onready var tiremark2 = %TireMark2
 @onready var smoke = %Smoke
 @onready var brake_light1 = %BrakeLight1
 @onready var brake_light2 = %BrakeLight2
 @onready var tirescreech = %TireScreech
+
+var can_drive: bool = false
+
+var notify_stop: bool = false
 
 var max_point_count: int = 250
 
@@ -28,6 +34,9 @@ var input: Vector2 = Vector2.ZERO
 
 
 func _input(event: InputEvent) -> void:
+	if not can_drive:
+		return
+	
 	if not event is InputEventKey:
 		return
 	
@@ -36,18 +45,7 @@ func _input(event: InputEvent) -> void:
 	if input.y == -1:
 		input.y = -0.4
 	
-	if is_braking:
-		linear_damp = 1.5
-		angular_damp = 1.5
-		input.y = 0
-		drift_factor = 0.95
-	else:
-		linear_damp = 0.5
-		angular_damp = 1
-		drift_factor = 0.85
-	
-	
-	if Input.is_key_pressed(KEY_E):
+	if Input.is_key_pressed(KEY_Q):
 		if lights.is_playing():
 			lights.play("RESET")
 			$Siren.playing = false
@@ -57,15 +55,23 @@ func _input(event: InputEvent) -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	if is_braking:
+		linear_damp = 1.5 if can_drive else 3
+		angular_damp = 1.5 if can_drive else 2
+		input.y = 0
+		drift_factor = 0.95
+	else:
+		linear_damp = 0.5
+		angular_damp = 1
+		drift_factor = 0.85
+	
 	apply_engine(state)
 	remove_orthogonal_velocity()
 	apply_steering(state)
 	
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
-
-
-func _process(delta: float) -> void:
+	
 	tiremark1.emitting = is_drifting()
 	tiremark2.emitting = is_drifting()
 	smoke.emitting = is_drifting()
@@ -80,7 +86,11 @@ func _process(delta: float) -> void:
 			tirescreech.stop()
 	
 	
-#	print(linear_velocity.length())
+	print(angular_velocity)
+	if notify_stop:
+		if linear_velocity.length() < 25 and angular_velocity < 0.05:
+			notify_stop = false
+			stopped.emit()
 
 
 func remove_orthogonal_velocity() -> void:
@@ -90,7 +100,7 @@ func remove_orthogonal_velocity() -> void:
 
 
 func is_drifting() -> bool:
-	return (is_braking and linear_velocity.length() > 50) or abs(get_lateral_velocity()) > 175
+	return (is_braking and linear_velocity.length() > 50) or abs(get_lateral_velocity()) > 200
 
 
 func get_lateral_velocity() -> float:
@@ -106,3 +116,9 @@ func apply_steering(state) -> void:
 func apply_engine(state) -> void:
 	var engine: Vector2 = -transform.y * forward_acceleration * input.y 
 	state.apply_central_force(engine)
+
+
+func stop_now() -> void:
+	can_drive = false
+	is_braking = true
+	notify_stop = true

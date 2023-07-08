@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdfffi0qduyfu"]
+[gd_scene load_steps=5 format=3 uid="uid://bdfffi0qduyfu"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_2mfsv"]
 [ext_resource type="Texture2D" uid="uid://ccs40mnupg30b" path="res://icon.svg" id="2_lbt1m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkh63"]
 radius = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tnhax"]
+radius = 50.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_2mfsv")
@@ -22,3 +25,13 @@ drag_left_margin = 0.1
 drag_right_margin = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="CarDoorArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarDoorArea"]
+shape = SubResource("CircleShape2D_tnhax")
+
+[connection signal="area_entered" from="CarDoorArea" to="." method="_on_car_door_area_area_entered"]
+[connection signal="area_exited" from="CarDoorArea" to="." method="_on_car_door_area_area_exited"]

@@ -83,8 +83,8 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.386139, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vi2r"]
-size = Vector2(50, 100)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hqtk"]
+size = Vector2(75, 100)
 
 [node name="Car" type="RigidBody2D"]
 inertia = 1.0
@@ -140,6 +140,9 @@ libraries = {
 "": SubResource("AnimationLibrary_2uv7d")
 }
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -73, 28, -73, 38, -67, 44, -59, 44, 70, 40, 74, -38, 74, -42, 70, -42, -57, -39, -67, -30, -73)
+
 [node name="Smoke" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, 50)
@@ -157,9 +160,6 @@ angle_min = -720.0
 angle_max = 720.0
 scale_amount_curve = SubResource("Curve_3momc")
 color_ramp = SubResource("Gradient_s4fac")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_5vi2r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
@@ -193,3 +193,14 @@ stream = ExtResource("6_mq5af")
 stream = ExtResource("7_5e14m")
 
 [node name="Radio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="DoorArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="DoorArea"]
+position = Vector2(-80, -10)
+shape = SubResource("RectangleShape2D_3hqtk")
+
+[node name="GetOutPosition" type="Node2D" parent="DoorArea"]
+position = Vector2(-200, -10)
