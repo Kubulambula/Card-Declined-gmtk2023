@@ -1,12 +1,112 @@
-[gd_scene load_steps=6 format=3 uid="uid://3u5dup7nlt8m"]
+[gd_scene load_steps=7 format=3 uid="uid://3u5dup7nlt8m"]
 
 [ext_resource type="TileSet" uid="uid://bsig7dbfg8l6e" path="res://assets/tilemaps/test.tres" id="1_nqnne"]
+[ext_resource type="Script" path="res://scenes/poi_list.gd" id="1_w8wla"]
 [ext_resource type="PackedScene" uid="uid://72an63mm5387" path="res://scenes/object/car.tscn" id="2_xdf6d"]
 [ext_resource type="PackedScene" uid="uid://crgyva050h3nc" path="res://scenes/object/off_screen_marker.tscn" id="3_gawp0"]
 [ext_resource type="PackedScene" uid="uid://dx7abmjmrkhuu" path="res://scenes/object/player.tscn" id="4_gwkws"]
-[ext_resource type="PackedScene" path="res://scenes/object/npc.tscn" id="8_yb7y5"]
+[ext_resource type="PackedScene" uid="uid://dystqppev317t" path="res://scenes/object/npc.tscn" id="8_yb7y5"]
 
 [node name="art_test" type="Node2D"]
+
+[node name="POIList" type="Node2D" parent="."]
+script = ExtResource("1_w8wla")
+
+[node name="Node2D" type="Node2D" parent="POIList"]
+position = Vector2(-6706, 538)
+
+[node name="Node2D2" type="Node2D" parent="POIList"]
+position = Vector2(-6734, -662)
+
+[node name="Node2D3" type="Node2D" parent="POIList"]
+position = Vector2(-4324, -1392)
+
+[node name="Node2D4" type="Node2D" parent="POIList"]
+position = Vector2(-3518, -2380)
+
+[node name="Node2D5" type="Node2D" parent="POIList"]
+position = Vector2(-1643, -5313)
+
+[node name="Node2D6" type="Node2D" parent="POIList"]
+position = Vector2(1945, -5345)
+
+[node name="Node2D7" type="Node2D" parent="POIList"]
+position = Vector2(5426, -5356)
+
+[node name="Node2D8" type="Node2D" parent="POIList"]
+position = Vector2(6558, -2419)
+
+[node name="Node2D9" type="Node2D" parent="POIList"]
+position = Vector2(-170, -2387)
+
+[node name="Node2D10" type="Node2D" parent="POIList"]
+position = Vector2(855, -1522)
+
+[node name="Node2D11" type="Node2D" parent="POIList"]
+position = Vector2(3610, -1714)
+
+[node name="Node2D12" type="Node2D" parent="POIList"]
+position = Vector2(5521, 550)
+
+[node name="Node2D13" type="Node2D" parent="POIList"]
+position = Vector2(6642, 2953)
+
+[node name="Node2D14" type="Node2D" parent="POIList"]
+position = Vector2(6653, 4373)
+
+[node name="Node2D15" type="Node2D" parent="POIList"]
+position = Vector2(4848, 3668)
+
+[node name="Node2D16" type="Node2D" parent="POIList"]
+position = Vector2(438, 3721)
+
+[node name="Node2D17" type="Node2D" parent="POIList"]
+position = Vector2(-8222, 3678)
+
+[node name="Node2D18" type="Node2D" parent="POIList"]
+position = Vector2(-5990, 2813)
+
+[node name="Node2D19" type="Node2D" parent="POIList"]
+position = Vector2(-5478, 4041)
+
+[node name="Node2D20" type="Node2D" parent="POIList"]
+position = Vector2(-1420, 1179)
+
+[node name="Node2D21" type="Node2D" parent="POIList"]
+position = Vector2(385, 2802)
+
+[node name="Node2D22" type="Node2D" parent="POIList"]
+position = Vector2(2595, 2151)
+
+[node name="Node2D23" type="Node2D" parent="POIList"]
+position = Vector2(-3341, -651)
+
+[node name="Node2D24" type="Node2D" parent="POIList"]
+position = Vector2(2769, -2792)
+
+[node name="Node2D25" type="Node2D" parent="POIList"]
+position = Vector2(8900, -5556)
+
+[node name="Node2D26" type="Node2D" parent="POIList"]
+position = Vector2(8945, 1376)
+
+[node name="Node2D27" type="Node2D" parent="POIList"]
+position = Vector2(8915, 4064)
+
+[node name="Node2D28" type="Node2D" parent="POIList"]
+position = Vector2(-3050, 523)
+
+[node name="Node2D29" type="Node2D" parent="POIList"]
+position = Vector2(-3536, 2469)
+
+[node name="Node2D30" type="Node2D" parent="POIList"]
+position = Vector2(2821, 4365)
+
+[node name="Node2D31" type="Node2D" parent="POIList"]
+position = Vector2(-8347, 1296)
+
+[node name="Node2D32" type="Node2D" parent="POIList"]
+position = Vector2(977, 534)
 
 [node name="Ground" type="TileMap" parent="."]
 tile_set = ExtResource("1_nqnne")
