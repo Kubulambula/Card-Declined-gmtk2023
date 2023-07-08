@@ -14,7 +14,7 @@ var max_forward_speed: float = 300
 var max_back_speed: float = 200
 
 var max_speed: float = max_forward_speed
-
+@onready var lights = $Sprite2D/AnimationPlayer
 
 var input: Vector2 = Vector2.ZERO
 
@@ -28,6 +28,12 @@ func _input(event: InputEvent) -> void:
 		input.y = -0.25
 	
 	is_braking = (Input.is_action_pressed("forward") and Input.is_action_pressed("back")) or Input.is_action_pressed("brake")
+	
+	if Input.is_key_pressed(KEY_E):
+		if lights.is_playing():
+			lights.play("RESET")
+		else:
+			lights.play("flash")
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
