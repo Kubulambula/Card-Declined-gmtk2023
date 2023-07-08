@@ -1,0 +1,214 @@
+[gd_scene load_steps=17 format=3 uid="uid://p35ukidyg4uu"]
+
+[ext_resource type="Script" path="res://scenes/car.gd" id="1_na8kg"]
+[ext_resource type="Texture2D" uid="uid://b54veqqqh6qqj" path="res://assets/cars/ambulance_open.png" id="3_aexym"]
+[ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_ao7sn"]
+[ext_resource type="Texture2D" uid="uid://mociklnk1r5f" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
+[ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="6_mq5af"]
+[ext_resource type="Texture2D" uid="uid://chiw6ru3x01ag" path="res://assets/particles/smoke.png" id="6_pue5m"]
+[ext_resource type="AudioStream" uid="uid://chcxxvdokgovi" path="res://assets/sound/siren.ogg" id="7_5e14m"]
+[ext_resource type="AudioStream" uid="uid://dhwln5b5jr44w" path="res://assets/sound/door.wav" id="8_obp0u"]
+[ext_resource type="AudioStream" uid="uid://ddrlgtub1fsx4" path="res://assets/sound/impact.wav" id="9_xlk6l"]
+
+[sub_resource type="Gradient" id="Gradient_okphn"]
+offsets = PackedFloat32Array(0, 0.722772, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_15ohu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D2:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uxnvf"]
+resource_name = "flash"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 8.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D2:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2uv7d"]
+_data = {
+"RESET": SubResource("Animation_15ohu"),
+"flash": SubResource("Animation_uxnvf")
+}
+
+[sub_resource type="Curve" id="Curve_3momc"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0643777, 1.05263), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_s4fac"]
+offsets = PackedFloat32Array(0, 0.386139, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hqtk"]
+size = Vector2(75, 100)
+
+[node name="Car" type="RigidBody2D"]
+gravity_scale = 0.0
+max_contacts_reported = 8
+contact_monitor = true
+can_sleep = false
+linear_damp = 0.5
+angular_damp = 1.0
+script = ExtResource("1_na8kg")
+
+[node name="TireMark1" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-25, 60)
+emitting = false
+amount = 200
+lifetime = 8.0
+texture = ExtResource("4_o8cd0")
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_okphn")
+
+[node name="TireMark2" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(25, 60)
+emitting = false
+amount = 200
+lifetime = 8.0
+texture = ExtResource("4_o8cd0")
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_okphn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("3_aexym")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D"]
+position = Vector2(15, -12)
+scale = Vector2(0.4575, 0.4575)
+color = Color(0, 0.501961, 0.694118, 1)
+energy = 0.0
+texture = ExtResource("3_ao7sn")
+texture_scale = 3.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
+position = Vector2(-13.913, 0)
+scale = Vector2(0.4575, 0.4575)
+color = Color(0.976471, 0.00784314, 0, 1)
+energy = 0.0
+texture = ExtResource("3_ao7sn")
+texture_scale = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_2uv7d")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -72, 24, -72, 40, -56, 40, -48, 40, 64, 32, 72, -32, 72, -40, 64, -40, -40, -40, -56, -24, -72)
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 50)
+emitting = false
+amount = 40
+lifetime = 2.0
+texture = ExtResource("6_pue5m")
+emission_shape = 4
+emission_points = PackedVector2Array(-25, 30, 25, 30)
+emission_colors = PackedColorArray()
+gravity = Vector2(0, 0)
+initial_velocity_min = 8.0
+initial_velocity_max = 64.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_3momc")
+color_ramp = SubResource("Gradient_s4fac")
+
+[node name="BrakeLight1" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-35, 70)
+color = Color(0.905882, 0, 0, 1)
+energy = 0.0
+texture = ExtResource("3_ao7sn")
+texture_scale = 0.5
+
+[node name="BrakeLight2" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(32, 64)
+color = Color(0.905882, 0, 0, 1)
+energy = 0.0
+texture = ExtResource("3_ao7sn")
+texture_scale = 0.5
+
+[node name="TireScreech" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_mq5af")
+
+[node name="Siren" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_5e14m")
+panning_strength = 2.0
+
+[node name="Radio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Door" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_obp0u")
+
+[node name="Impact" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_xlk6l")
+
+[node name="DoorArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="DoorArea"]
+position = Vector2(-80, -10)
+shape = SubResource("RectangleShape2D_3hqtk")
+
+[node name="GetOutPosition" type="Node2D" parent="DoorArea"]
+position = Vector2(-100, -10)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
