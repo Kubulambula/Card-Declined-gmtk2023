@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bdfffi0qduyfu"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_2mfsv"]
-[ext_resource type="Texture2D" uid="uid://cyiwjmd2l0qqg" path="res://assets/player/player_legs.png" id="2_ncu2s"]
-[ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="2_skm2p"]
-[ext_resource type="Texture2D" uid="uid://3tn7vyjkl014" path="res://assets/player/player_body.png" id="3_r47n1"]
-[ext_resource type="Texture2D" uid="uid://vew1bsefrtwu" path="res://assets/player/player_head.png" id="4_dwe64"]
+[ext_resource type="Script" path="res://scenes/objects/player.gd" id="1_ai1a6"]
+[ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="2_7ampr"]
+[ext_resource type="Texture2D" uid="uid://cyiwjmd2l0qqg" path="res://assets/player/player_legs.png" id="3_ciufm"]
+[ext_resource type="Texture2D" uid="uid://3tn7vyjkl014" path="res://assets/player/player_body.png" id="4_oq15m"]
+[ext_resource type="Texture2D" uid="uid://vew1bsefrtwu" path="res://assets/player/player_head.png" id="5_33rnl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkh63"]
 radius = 40.0
@@ -99,7 +99,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_2mfsv")
+script = ExtResource("1_ai1a6")
 
 [node name="Node2D" type="Node2D" parent="."]
 rotation = 1.5708
@@ -108,27 +108,27 @@ scale = Vector2(0.7, 0.7)
 [node name="Shadow" type="Sprite2D" parent="Node2D"]
 modulate = Color(0.0862745, 0.0823529, 0.329412, 0.498039)
 scale = Vector2(2, 2)
-texture = ExtResource("2_skm2p")
+texture = ExtResource("2_7ampr")
 
 [node name="LegL" type="Sprite2D" parent="Node2D"]
 position = Vector2(-30, 0)
-texture = ExtResource("2_ncu2s")
+texture = ExtResource("3_ciufm")
 
 [node name="LegR" type="Sprite2D" parent="Node2D"]
 position = Vector2(30, 0)
-texture = ExtResource("2_ncu2s")
+texture = ExtResource("3_ciufm")
 
 [node name="Body" type="Sprite2D" parent="Node2D"]
-texture = ExtResource("3_r47n1")
+texture = ExtResource("4_oq15m")
 
 [node name="Head" type="Sprite2D" parent="Node2D"]
-texture = ExtResource("4_dwe64")
+texture = ExtResource("5_33rnl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hkh63")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.35, 0.35)
 position_smoothing_enabled = true
 position_smoothing_speed = 50.0
 drag_horizontal_enabled = true

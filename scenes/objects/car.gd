@@ -133,7 +133,6 @@ func apply_steering(state) -> void:
 func apply_engine(state) -> void:
 	var engine: Vector2 = -transform.y * forward_acceleration * input.y 
 	state.apply_central_force(engine)
-	
 
 
 func stop_now() -> void:
