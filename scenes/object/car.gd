@@ -27,12 +27,12 @@ var drift_factor: float = 0.9
 
 var is_braking: bool = false
 
-var turn_acceleration: float = 0.2
-var slow_turn_acceleration: float = 0.15
+var turn_acceleration: float = 0.15
+var slow_turn_acceleration: float = 0.1
 var max_turn_speed: float = 4
 
-var forward_acceleration: float = 1100
-var max_forward_speed: float = 1000
+var forward_acceleration: float = 1150
+var max_forward_speed: float = 1700
 var max_back_speed: float = 400
 
 var last_linear_velocity: Vector2 = Vector2.ZERO
@@ -106,7 +106,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			%Door.play()
 	
 	last_linear_velocity = state.linear_velocity
-#	print("l: ", linear_velocity.length())
+	print("l: ", linear_velocity.length())
 #	print("a: ", angular_velocity)
 
 
