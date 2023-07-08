@@ -1,4 +1,9 @@
-extends Node2D
+[gd_scene load_steps=3 format=3 uid="uid://crgyva050h3nc"]
+
+[ext_resource type="Texture2D" uid="uid://c57lktv755imy" path="res://assets/player/pointer.png" id="1_peynt"]
+
+[sub_resource type="GDScript" id="GDScript_wf5yi"]
+script/source = "extends Node2D
 
 
 @export var icon_texture: Texture = null
@@ -58,3 +63,20 @@ func set_marker_rotation() -> void:
 	var angle = (global_position - marker.global_position).angle()
 	marker.global_rotation = angle
 	icon.global_rotation = 0
+"
+
+[node name="OffScreenMarker" type="Node2D"]
+script = SubResource("GDScript_wf5yi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+follow_viewport_enabled = true
+
+[node name="Marker" type="Sprite2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+texture = ExtResource("1_peynt")
+offset = Vector2(-50, 0)
+
+[node name="Icon" type="Sprite2D" parent="CanvasLayer/Marker"]
+unique_name_in_owner = true
+position = Vector2(-65, 0)
