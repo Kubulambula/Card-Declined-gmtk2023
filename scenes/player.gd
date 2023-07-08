@@ -10,6 +10,9 @@ var inside_car: bool = false
 
 @onready var world = get_parent()
 
+func _init() -> void:
+	Global.player = self
+
 
 func _physics_process(delta: float) -> void:
 	look_at(get_global_mouse_position())
@@ -48,9 +51,10 @@ func get_in() -> void:
 	area.call_deferred("add_child", self)
 	position = Vector2.ZERO
 	
-	area.get_parent().can_drive = true
 	inside_car = true
 	visible = false
+	await get_tree().create_timer(0.2).timeout
+	area.get_parent().can_drive = true
 
 
 func get_out() -> void:

@@ -11,11 +11,14 @@ const OPENED = preload("res://assets/cars/ambulance_open.png")
 @onready var brake_light1 = %BrakeLight1
 @onready var brake_light2 = %BrakeLight2
 @onready var tirescreech = %TireScreech
+@onready var door = %Door
+@onready var impact = %Impact
 
 var can_drive: bool = false:
 	set(value):
 		if value:
 			$Sprite2D.texture = CLOSED
+			%Door.play()
 		can_drive = value
 
 var notify_stop: bool = false
@@ -33,6 +36,8 @@ var forward_acceleration: float = 1250
 var back_acceleration: float = 500
 var max_forward_speed: float = 1000
 var max_back_speed: float = 400
+
+var last_linear_velocity: Vector2 = Vector2.ZERO
 
 var max_speed: float = max_forward_speed
 @onready var lights = $Sprite2D/AnimationPlayer
@@ -97,6 +102,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			notify_stop = false
 			stopped.emit()
 			$Sprite2D.texture = OPENED
+			%Door.play()
+	
+	last_linear_velocity = state.linear_velocity
+#	print("l: ", linear_velocity.length())
+#	print("a: ", angular_velocity)
 
 
 func remove_orthogonal_velocity() -> void:
@@ -129,3 +139,11 @@ func stop_now() -> void:
 	can_drive = false
 	is_braking = true
 	notify_stop = true
+
+
+func _on_body_entered(body: Node) -> void:
+	print("hit")
+	if impact.playing or body == Global.player:
+		return
+	if last_linear_velocity.length() > 25 or abs(angular_velocity) > 0.2:
+		impact.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dy4p27it41a4c"]
+[gd_scene load_steps=17 format=3 uid="uid://dy4p27it41a4c"]
 
 [ext_resource type="Script" path="res://scenes/car.gd" id="1_na8kg"]
 [ext_resource type="Texture2D" uid="uid://b54veqqqh6qqj" path="res://assets/cars/ambulance_open.png" id="3_aexym"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="6_mq5af"]
 [ext_resource type="Texture2D" uid="uid://owk203cxcnf6" path="res://assets/particles/smoke.png" id="6_pue5m"]
 [ext_resource type="AudioStream" uid="uid://chcxxvdokgovi" path="res://assets/sound/siren.ogg" id="7_5e14m"]
+[ext_resource type="AudioStream" uid="uid://dhwln5b5jr44w" path="res://assets/sound/door.wav" id="8_obp0u"]
+[ext_resource type="AudioStream" uid="uid://ddrlgtub1fsx4" path="res://assets/sound/impact.wav" id="9_xlk6l"]
 
 [sub_resource type="Gradient" id="Gradient_okphn"]
 offsets = PackedFloat32Array(0, 0.722772, 1)
@@ -88,6 +90,8 @@ size = Vector2(75, 100)
 
 [node name="Car" type="RigidBody2D"]
 gravity_scale = 0.0
+max_contacts_reported = 8
+contact_monitor = true
 can_sleep = false
 linear_damp = 0.5
 angular_damp = 1.0
@@ -98,7 +102,7 @@ unique_name_in_owner = true
 position = Vector2(-25, 60)
 emitting = false
 amount = 200
-lifetime = 12.0
+lifetime = 8.0
 texture = ExtResource("4_o8cd0")
 particle_flag_align_y = true
 gravity = Vector2(0, 0)
@@ -109,7 +113,7 @@ unique_name_in_owner = true
 position = Vector2(25, 60)
 emitting = false
 amount = 200
-lifetime = 12.0
+lifetime = 8.0
 texture = ExtResource("4_o8cd0")
 particle_flag_align_y = true
 gravity = Vector2(0, 0)
@@ -195,6 +199,15 @@ stream = ExtResource("6_mq5af")
 stream = ExtResource("7_5e14m")
 
 [node name="Radio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Door" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_obp0u")
+
+[node name="Impact" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_xlk6l")
 
 [node name="DoorArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -209,3 +222,5 @@ position = Vector2(-100, -10)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -73, 28, -73, 38, -67, 44, -59, 44, 70, 40, 74, -38, 74, -42, 70, -42, -57, -39, -67, -30, -73)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
