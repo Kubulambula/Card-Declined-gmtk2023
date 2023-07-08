@@ -62,15 +62,20 @@ func get_out() -> void:
 	var car = area.get_parent()
 	car.stop_now()
 	await car.stopped
+	
+	$Camera2D.position_smoothing_enabled = false
+	
 	area.call_deferred("remove_child", self)
 	world.call_deferred("add_child", self)
-	
-	await get_tree().create_timer(0.1).timeout
 	set_deferred("global_position", area.get_node("GetOutPosition").global_position)
+	
 	inside_car = false
 	visible = true
+	$CollisionShape2D.set_deferred("disabled", false)
 	
-	$CollisionShape2D.disabled = false
+	await get_tree().create_timer(0.1).timeout
+	$Camera2D.position_smoothing_enabled = true
+	
 
 
 func _on_car_door_area_area_entered(area: Area2D) -> void:

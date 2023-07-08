@@ -55,7 +55,10 @@ func _input(event: InputEvent) -> void:
 	is_braking = (Input.is_action_pressed("forward") and Input.is_action_pressed("back")) or Input.is_action_pressed("brake")
 	input = Vector2(Input.get_axis("left", "right"), Input.get_axis("back", "forward"))
 	if input.y == -1:
-		input.y = -0.4
+		input.y = -0.3
+	
+	if transform.y.dot(linear_velocity) > 1: #is going backward
+		input.x = -input.x
 	
 	if Input.is_key_pressed(KEY_Q):
 		if lights.is_playing():
