@@ -1,16 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dy4p27it41a4c"]
+[gd_scene load_steps=13 format=3 uid="uid://dy4p27it41a4c"]
 
 [ext_resource type="Script" path="res://scenes/car.gd" id="1_na8kg"]
 [ext_resource type="Texture2D" uid="uid://c413w5irodrag" path="res://assets/cars/ambulance.png" id="2_2d8d2"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_ao7sn"]
 [ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
-[ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="6_mq5af"]
 [ext_resource type="Texture2D" uid="uid://owk203cxcnf6" path="res://assets/particles/smoke.png" id="6_pue5m"]
-[ext_resource type="AudioStream" uid="uid://chcxxvdokgovi" path="res://assets/sound/siren.ogg" id="7_5e14m"]
-
-[sub_resource type="Gradient" id="Gradient_okphn"]
-offsets = PackedFloat32Array(0, 0.722772, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Animation" id="Animation_15ohu"]
 length = 0.001
@@ -74,6 +68,13 @@ _data = {
 "flash": SubResource("Animation_uxnvf")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vi2r"]
+size = Vector2(50, 100)
+
+[sub_resource type="Gradient" id="Gradient_okphn"]
+offsets = PackedFloat32Array(0, 0.722772, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
 [sub_resource type="Curve" id="Curve_3momc"]
 max_value = 2.0
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0643777, 1.05263), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
@@ -83,16 +84,48 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.386139, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vi2r"]
-size = Vector2(50, 100)
-
 [node name="Car" type="RigidBody2D"]
 inertia = 1.0
 gravity_scale = 0.0
 can_sleep = false
-linear_damp = 0.5
+linear_damp = 1.0
 angular_damp = 1.0
 script = ExtResource("1_na8kg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2d8d2")
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
+position = Vector2(-16, -12)
+scale = Vector2(0.4575, 0.4575)
+color = Color(0.976471, 0.00784314, 0, 1)
+energy = 0.0
+texture = ExtResource("3_ao7sn")
+texture_scale = 3.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D"]
+position = Vector2(15, -12)
+scale = Vector2(0.4575, 0.4575)
+color = Color(0, 0.501961, 0.694118, 1)
+energy = 0.0
+texture = ExtResource("3_ao7sn")
+texture_scale = 3.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_2uv7d")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5vi2r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="TireMark1" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -116,30 +149,6 @@ particle_flag_align_y = true
 gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_okphn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_2d8d2")
-
-[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D"]
-position = Vector2(15, -12)
-scale = Vector2(0.4575, 0.4575)
-color = Color(0, 0.501961, 0.694118, 1)
-energy = 0.0
-texture = ExtResource("3_ao7sn")
-texture_scale = 3.0
-
-[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
-position = Vector2(-16, -12)
-scale = Vector2(0.4575, 0.4575)
-color = Color(0.976471, 0.00784314, 0, 1)
-energy = 0.0
-texture = ExtResource("3_ao7sn")
-texture_scale = 3.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-"": SubResource("AnimationLibrary_2uv7d")
-}
-
 [node name="Smoke" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, 50)
@@ -158,38 +167,16 @@ angle_max = 720.0
 scale_amount_curve = SubResource("Curve_3momc")
 color_ramp = SubResource("Gradient_s4fac")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_5vi2r")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-editor_draw_limits = true
-editor_draw_drag_margin = true
-
-[node name="BrakeLight1" type="PointLight2D" parent="."]
+[node name="BrakeLibht1" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-35, 70)
 color = Color(0.905882, 0, 0, 1)
 energy = 0.0
 texture = ExtResource("3_ao7sn")
-texture_scale = 0.5
 
-[node name="BrakeLight2" type="PointLight2D" parent="."]
+[node name="BrakeLibht2" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(35, 70)
 color = Color(0.905882, 0, 0, 1)
 energy = 0.0
 texture = ExtResource("3_ao7sn")
-texture_scale = 0.5
-
-[node name="TireScreech" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("6_mq5af")
-
-[node name="Siren" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_5e14m")
-
-[node name="Radio" type="AudioStreamPlayer2D" parent="."]

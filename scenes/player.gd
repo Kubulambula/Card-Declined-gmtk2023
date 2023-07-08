@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 var max_speed = 400.0
-var acceleration = 2000
+var acceleration = 4000
 var friction = 2500
 
 
