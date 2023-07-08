@@ -1,10 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cobrsn05if10r"]
+[gd_scene load_steps=3 format=3 uid="uid://cobrsn05if10r"]
 
 [ext_resource type="Script" path="res://scenes/off_screen_marker.gd" id="1_whhwl"]
+[ext_resource type="Texture2D" uid="uid://c57lktv755imy" path="res://assets/player/pointer.png" id="2_owas6"]
 
 [node name="OffScreenMarker" type="Node2D"]
 script = ExtResource("1_whhwl")
 
-[node name="Marker" type="Sprite2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+follow_viewport_enabled = true
 
-[node name="Icon" type="Sprite2D" parent="Marker"]
+[node name="Marker" type="Sprite2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+texture = ExtResource("2_owas6")
+offset = Vector2(-50, 0)
+
+[node name="Icon" type="Sprite2D" parent="CanvasLayer/Marker"]
+unique_name_in_owner = true
+position = Vector2(-65, 0)

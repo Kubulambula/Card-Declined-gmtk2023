@@ -53,7 +53,7 @@ func get_in() -> void:
 	
 	inside_car = true
 	visible = false
-	await get_tree().create_timer(0.2).timeout
+#	await get_tree().create_timer(0.2).timeout
 	area.get_parent().can_drive = true
 
 

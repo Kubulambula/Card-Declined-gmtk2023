@@ -4,33 +4,29 @@ extends Node2D
 @export var icon_texture: Texture = null
 @export var marker_color: Color = Color.WHITE
 
-@onready var icon: Sprite2D = $Marker/Icon
-@onready var marker: Sprite2D = $Marker
+@onready var marker: Sprite2D = %Marker
+@onready var icon: Sprite2D = %Icon
 
 
 func _ready() -> void:
 	icon.texture = icon_texture
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var canvas = get_canvas_transform()
 	var canvas_origin = -canvas.origin / canvas.get_scale()
 	var size = get_viewport_rect().size / canvas.get_scale()
 	
 	set_marker_position(Rect2(canvas_origin, size))
 	set_marker_rotation()
-#	get_viewport().get_camera_2d()
 
 
 func set_marker_position(bounds: Rect2) -> void:
-	visible = !bounds.has_point(global_position)
+	marker.visible = !bounds.has_point(global_position)
+	if not marker.visible:
+		return
 	
-#	visible = true
-	
-#	marker.global_position.x = clamp(global_position.x, bounds.position.x, bounds.end.x)
-#	marker.global_position.y = clamp(global_position.y, bounds.position.y, bounds.end.y)
-
-	var target_position = get_viewport().get_camera_2d().global_position
+	var target_position = Global.player.global_position
 	var displacement = global_position - target_position
 	var length
 	var angle
@@ -49,10 +45,14 @@ func set_marker_position(bounds: Rect2) -> void:
 		angle = displacement.angle()
 		length = x_length / cos(angle) if cos(angle) != 0 else x_length
 	
-	marker.global_position.x = sin(angle) * -length
-	marker.global_position.y = cos(angle) * -length
+	marker.global_position.x = -sin(angle) * length
+	marker.global_position.y = -cos(angle) * length
 	
+	marker.global_position = polar_to_cartesian(length, displacement.angle()) + target_position
 
+
+func polar_to_cartesian(r: float, th: float) -> Vector2:
+	return Vector2(r * cos(th), r * sin(th))
 
 func set_marker_rotation() -> void:
 	var angle = (global_position - marker.global_position).angle()

@@ -23,18 +23,16 @@ var can_drive: bool = false:
 
 var notify_stop: bool = false
 
-var max_point_count: int = 250
-
-var drift_factor: float = 0.85
+var drift_factor: float = 0.9
 
 var is_braking: bool = false
 
-var turn_acceleration: float = 0.3
+var turn_acceleration: float = 0.2
+var slow_turn_acceleration: float = 0.15
 var max_turn_speed: float = 4
 
-var forward_acceleration: float = 1250
-var back_acceleration: float = 500
-var max_forward_speed: float = 1000
+var forward_acceleration: float = 1100
+var max_forward_speed: float = 950
 var max_back_speed: float = 400
 
 var last_linear_velocity: Vector2 = Vector2.ZERO
@@ -55,9 +53,9 @@ func _input(event: InputEvent) -> void:
 	is_braking = (Input.is_action_pressed("forward") and Input.is_action_pressed("back")) or Input.is_action_pressed("brake")
 	input = Vector2(Input.get_axis("left", "right"), Input.get_axis("back", "forward"))
 	if input.y == -1:
-		input.y = -0.3
+		input.y = -0.5
 	
-	if transform.y.dot(linear_velocity) > 1: #is going backward
+	if input.y == -1 or transform.y.dot(linear_velocity.normalized()) > 0: #is going backward
 		input.x = -input.x
 	
 	if Input.is_key_pressed(KEY_Q):
@@ -71,8 +69,8 @@ func _input(event: InputEvent) -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if is_braking:
-		linear_damp = 1.5 if can_drive else 3
-		angular_damp = 1.5 if can_drive else 2
+		linear_damp = 2.0 if can_drive else 3.5
+		angular_damp = 1.5 if can_drive else 4.0
 		input.y = 0
 		drift_factor = 0.95
 	else:
@@ -119,7 +117,7 @@ func remove_orthogonal_velocity() -> void:
 
 
 func is_drifting() -> bool:
-	return (is_braking and linear_velocity.length() > 50) or abs(get_lateral_velocity()) > 200
+	return (is_braking and linear_velocity.length() > 50) or abs(get_lateral_velocity()) > 170
 
 
 func get_lateral_velocity() -> float:
@@ -128,7 +126,7 @@ func get_lateral_velocity() -> float:
 
 func apply_steering(state) -> void:
 	if state.linear_velocity.length() > 60 or input.y: # if moving
-		state.angular_velocity += input.x * turn_acceleration
+		state.angular_velocity += input.x * (turn_acceleration if state.linear_velocity.length() < 700 else slow_turn_acceleration)
 	state.angular_velocity = clampf(state.angular_velocity, -max_turn_speed, max_turn_speed)
 
 
@@ -145,8 +143,8 @@ func stop_now() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	print("hit")
 	if impact.playing or body == Global.player:
 		return
 	if last_linear_velocity.length() > 25 or abs(angular_velocity) > 0.2:
+		print("hit")
 		impact.play()
