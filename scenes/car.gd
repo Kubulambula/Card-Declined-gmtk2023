@@ -1,17 +1,21 @@
 extends RigidBody2D
 
+@onready var tiremark1 = %TireMark1
+@onready var tiremark2 = %TireMark2
 
-var drift_factor: float = 0.8
+var max_point_count: int = 250
+
+var drift_factor: float = .95
 
 var is_braking: bool = false
 
 var turn_acceleration: float = 0.3
-var max_turn_speed: float = 3
+var max_turn_speed: float = 4
 
-var forward_acceleration: float = 800
+var forward_acceleration: float = 1250
 var back_acceleration: float = 500
-var max_forward_speed: float = 300
-var max_back_speed: float = 200
+var max_forward_speed: float = 1000
+var max_back_speed: float = 400
 
 var max_speed: float = max_forward_speed
 @onready var lights = $Sprite2D/AnimationPlayer
@@ -25,7 +29,7 @@ func _input(event: InputEvent) -> void:
 	
 	input = Vector2(Input.get_axis("left", "right"), Input.get_axis("back", "forward"))
 	if input.y == -1:
-		input.y = -0.25
+		input.y = -0.4
 	
 	is_braking = (Input.is_action_pressed("forward") and Input.is_action_pressed("back")) or Input.is_action_pressed("brake")
 	
@@ -44,7 +48,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
 	
-	print(is_drifting())
+	tiremark1.emitting = is_drifting()
+	tiremark2.emitting = is_drifting()
+	
+#	print(linear_velocity.length())
 
 
 func remove_orthogonal_velocity() -> void:
@@ -62,7 +69,7 @@ func get_lateral_velocity() -> float:
 
 
 func apply_steering(state) -> void:
-	if state.linear_velocity.length() > 50 : # if moving
+	if state.linear_velocity.length() > 60 or input.y: # if moving
 		state.angular_velocity += input.x * turn_acceleration
 	state.angular_velocity = clampf(state.angular_velocity, -max_turn_speed, max_turn_speed)
 

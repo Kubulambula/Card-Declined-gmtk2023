@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://binnoh7xe3sre"]
+[gd_scene load_steps=6 format=3 uid="uid://3u5dup7nlt8m"]
 
 [ext_resource type="TileSet" uid="uid://bsig7dbfg8l6e" path="res://assets/tilemaps/test.tres" id="1_nqnne"]
 [ext_resource type="Texture2D" uid="uid://cowb2h0uoohvn" path="res://assets/tilemaps/test_tilemap.png" id="2_1dtur"]
+[ext_resource type="PackedScene" uid="uid://dy4p27it41a4c" path="res://scenes/car.tscn" id="2_f1n37"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5jvb"]
 texture = ExtResource("2_1dtur")
@@ -26,10 +27,7 @@ sources/1 = SubResource("TileSetAtlasSource_o5jvb")
 
 [node name="art_test" type="Node2D"]
 
-[node name="0" type="CanvasLayer" parent="."]
-follow_viewport_scale = 0.0
-
-[node name="TileMap" type="TileMap" parent="0"]
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_nqnne")
 format = 2
 layer_0/name = "ground"
@@ -76,4 +74,7 @@ follow_viewport_scale = 1.15
 [node name="TileMap" type="TileMap" parent="2"]
 tile_set = ExtResource("1_nqnne")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65538, 262144, 0, -131074, 327680, 0, -196610, 262144, 0, -196609, 327680, 0, -262144, 327680, 0, -262143, 262144, 0, -196607, 327680, 0, -131071, 262144, 0, -131072, 327680, 0, -65537, 327680, 0)
+layer_0/tile_data = PackedInt32Array(-65538, 262144, 0, -131074, 327680, 0, -196610, 262144, 0, -196609, 327680, 0, -262144, 327680, 0, -262143, 262144, 0, -196607, 327680, 0, -65537, 327680, 0, -131071, 262144, 0, -131072, 327680, 0)
+
+[node name="Node2D" parent="." instance=ExtResource("2_f1n37")]
+position = Vector2(493, -25)
