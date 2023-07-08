@@ -8,8 +8,11 @@ var turn_speed: float = 8
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 
 
-func _ready() -> void:
+func _init() -> void:
+	Global.npc_list.append(self)
 	global_position = Global.get_random_poi()
+
+func _ready() -> void:
 	set_target(Global.get_random_poi())
 	set_physics_process(false)
 	agent.set_navigation_map(tilemap)
@@ -22,7 +25,7 @@ func set_target(target_position: Vector2) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	set_target(get_global_mouse_position())
+#	set_target(get_global_mouse_position())
 	if agent.distance_to_target() > 100:
 		var direction = agent.get_next_path_position() - global_position
 		rotation = lerp_angle(rotation, direction.angle(), delta * turn_speed)

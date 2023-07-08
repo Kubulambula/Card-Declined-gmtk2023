@@ -13,6 +13,8 @@ const OPENED = preload("res://assets/cars/ambulance_open.png")
 @onready var tirescreech = %TireScreech
 @onready var door = %Door
 @onready var impact = %Impact
+@onready var weewoo = %WeeWoo
+@onready var siren = %Siren
 
 var can_drive: bool = false:
 	set(value):
@@ -31,15 +33,15 @@ var turn_acceleration: float = 0.15
 var slow_turn_acceleration: float = 0.1
 var max_turn_speed: float = 4
 
-var forward_acceleration: float = 1150
-var max_forward_speed: float = 1700
+var forward_acceleration: float = 1100
+var max_forward_speed: float = 1500
 var max_back_speed: float = 400
 
 var last_linear_velocity: Vector2 = Vector2.ZERO
 
 var max_speed: float = max_forward_speed
 @onready var lights = $Sprite2D/AnimationPlayer
-@onready var lights2 = $AnimationPlayer2
+@onready var lights2 = $CanvasLayer/AnimationPlayer2
 
 var input: Vector2 = Vector2.ZERO
 
@@ -63,11 +65,11 @@ func _input(event: InputEvent) -> void:
 		if lights.is_playing():
 			lights.play("RESET")
 			lights2.play("RESET")
-			$Siren.playing = false
+			siren.playing = false
 		else:
 			lights.play("flash")
 			lights2.play("WEE_WOO")
-			$Siren.playing = true
+			siren.playing = true
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
@@ -150,3 +152,7 @@ func _on_body_entered(body: Node) -> void:
 	if last_linear_velocity.length() > 25 or abs(angular_velocity) > 0.2:
 		print("hit")
 		impact.play()
+
+
+func _process(delta: float) -> void:
+	weewoo.position = get_global_transform_with_canvas().origin

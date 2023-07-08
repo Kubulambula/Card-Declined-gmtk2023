@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=3 uid="uid://72an63mm5387"]
 
 [ext_resource type="Script" path="res://scenes/object/car.gd" id="1_7nlux"]
-[ext_resource type="Texture2D" uid="uid://mociklnk1r5f" path="res://assets/particles/tiremark.png" id="1_8atxf"]
+[ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="1_8atxf"]
 [ext_resource type="Texture2D" uid="uid://b54veqqqh6qqj" path="res://assets/cars/ambulance_open.png" id="2_ywh1v"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_j2hlj"]
-[ext_resource type="Texture2D" uid="uid://chiw6ru3x01ag" path="res://assets/particles/smoke.png" id="4_sl6uw"]
+[ext_resource type="Texture2D" uid="uid://owk203cxcnf6" path="res://assets/particles/smoke.png" id="4_sl6uw"]
 [ext_resource type="Texture2D" uid="uid://dl8im6klqu1mp" path="res://assets/particles/WEE.png" id="5_6sqgx"]
 [ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="5_qw33i"]
 [ext_resource type="AudioStream" uid="uid://chcxxvdokgovi" path="res://assets/sound/siren.ogg" id="6_1ymd3"]
@@ -45,7 +45,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Woo:visible")
+tracks/2/path = NodePath("../CanvasLayer/WeeWoo/Woo:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -57,7 +57,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Wee:visible")
+tracks/3/path = NodePath("../CanvasLayer/WeeWoo/Wee:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -69,7 +69,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Woo:position")
+tracks/4/path = NodePath("../CanvasLayer/WeeWoo/Woo:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -81,7 +81,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Wee:position")
+tracks/5/path = NodePath("../CanvasLayer/WeeWoo/Wee:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -89,6 +89,59 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-95, 60)]
+}
+
+[sub_resource type="Animation" id="Animation_d5seb"]
+resource_name = "WEE_WOO"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CanvasLayer/WeeWoo/Woo:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 1.1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CanvasLayer/WeeWoo/Wee:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.7, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CanvasLayer/WeeWoo/Woo:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(127, 22), Vector2(120, 80), Vector2(127, 22)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CanvasLayer/WeeWoo/Wee:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-95, 60), Vector2(-150, -20), Vector2(-95, 60)]
 }
 
 [sub_resource type="Animation" id="Animation_uxnvf"]
@@ -118,59 +171,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [8.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_d5seb"]
-resource_name = "WEE_WOO"
-length = 1.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Woo:visible")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.7, 1.1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Wee:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4, 0.7, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Woo:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(127, 22), Vector2(120, 80), Vector2(127, 22)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Wee:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-95, 60), Vector2(-150, -20), Vector2(-95, 60)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2uv7d"]
@@ -226,23 +226,6 @@ color_ramp = SubResource("Gradient_okphn")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.15, 1.15)
 texture = ExtResource("2_ywh1v")
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-"": SubResource("AnimationLibrary_2uv7d")
-}
-
-[node name="Wee" type="Sprite2D" parent="Sprite2D"]
-visible = false
-position = Vector2(-95, 60)
-scale = Vector2(0.869565, 0.869565)
-texture = ExtResource("5_6sqgx")
-
-[node name="Woo" type="Sprite2D" parent="Sprite2D"]
-visible = false
-position = Vector2(127, 22)
-scale = Vector2(0.869565, 0.869565)
-texture = ExtResource("6_pk8fs")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Sprite2D"]
 position = Vector2(15, -12)
@@ -307,7 +290,9 @@ unique_name_in_owner = true
 stream = ExtResource("5_qw33i")
 
 [node name="Siren" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("6_1ymd3")
+max_distance = 3500.0
 panning_strength = 2.0
 
 [node name="Radio" type="AudioStreamPlayer2D" parent="."]
@@ -333,5 +318,31 @@ shape = SubResource("RectangleShape2D_3hqtk")
 position = Vector2(-115, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2uv7d")
+}
+
+[node name="WeeWoo" type="Node2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(13.9394, 20.2755)
+scale = Vector2(0.3, 0.3)
+
+[node name="Wee" type="Sprite2D" parent="CanvasLayer/WeeWoo"]
+visible = false
+position = Vector2(-95, 60)
+scale = Vector2(1, 1)
+texture = ExtResource("5_6sqgx")
+
+[node name="Woo" type="Sprite2D" parent="CanvasLayer/WeeWoo"]
+visible = false
+position = Vector2(127, 22)
+scale = Vector2(1, 1)
+texture = ExtResource("6_pk8fs")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

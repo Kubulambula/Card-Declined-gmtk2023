@@ -7,6 +7,8 @@ var poi_list: Array[Vector2] = [Vector2(-4000, 1400)]: # big empty place
 		value.shuffle()
 		poi_list = value
 
+var npc_list: Array[Node] = []
+
 var poi_index: int = 0
 
 func get_random_poi() -> Vector2:
