@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lcndikgttcvm"
-path="res://.godot/imported/road_big_left.png-31061367919e562426ecdf6be21ba1c7.ctex"
+uid="uid://cmta5ibn38rps"
+path="res://.godot/imported/roof3_idk.png-b694912f109550a01222c0427d3a42ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/road/road_big_left.png"
-dest_files=["res://.godot/imported/road_big_left.png-31061367919e562426ecdf6be21ba1c7.ctex"]
+source_file="res://assets/roofs/roof3_idk.png"
+dest_files=["res://.godot/imported/roof3_idk.png-b694912f109550a01222c0427d3a42ff.ctex"]
 
 [params]
 

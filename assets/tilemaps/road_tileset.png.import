@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lcndikgttcvm"
-path="res://.godot/imported/road_big_left.png-31061367919e562426ecdf6be21ba1c7.ctex"
+uid="uid://b5d8v2l11mdpi"
+path="res://.godot/imported/road_tileset.png-47a86f4872325bffa8161f96df7d8134.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/road/road_big_left.png"
-dest_files=["res://.godot/imported/road_big_left.png-31061367919e562426ecdf6be21ba1c7.ctex"]
+source_file="res://assets/tilemaps/road_tileset.png"
+dest_files=["res://.godot/imported/road_tileset.png-47a86f4872325bffa8161f96df7d8134.ctex"]
 
 [params]
 
