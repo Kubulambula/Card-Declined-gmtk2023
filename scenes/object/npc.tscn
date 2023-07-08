@@ -134,4 +134,3 @@ libraries = {
 shape = SubResource("CircleShape2D_pqe24")
 
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
-[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
