@@ -3,10 +3,13 @@ extends RigidBody2D
 @onready var tiremark1 = %TireMark1
 @onready var tiremark2 = %TireMark2
 @onready var smoke = %Smoke
+@onready var brake_light1 = %BrakeLight1
+@onready var brake_light2 = %BrakeLight2
+@onready var tirescreech = %TireScreech
 
 var max_point_count: int = 250
 
-var drift_factor: float = .95
+var drift_factor: float = 0.85
 
 var is_braking: bool = false
 
@@ -28,17 +31,29 @@ func _input(event: InputEvent) -> void:
 	if not event is InputEventKey:
 		return
 	
+	is_braking = (Input.is_action_pressed("forward") and Input.is_action_pressed("back")) or Input.is_action_pressed("brake")
 	input = Vector2(Input.get_axis("left", "right"), Input.get_axis("back", "forward"))
 	if input.y == -1:
 		input.y = -0.4
 	
-	is_braking = (Input.is_action_pressed("forward") and Input.is_action_pressed("back")) or Input.is_action_pressed("brake")
+	if is_braking:
+		linear_damp = 1.5
+		angular_damp = 1.5
+		input.y = 0
+		drift_factor = 0.95
+	else:
+		linear_damp = 0.5
+		angular_damp = 1
+		drift_factor = 0.85
+	
 	
 	if Input.is_key_pressed(KEY_E):
 		if lights.is_playing():
 			lights.play("RESET")
+			$Siren.playing = false
 		else:
 			lights.play("flash")
+			$Siren.playing = true
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
@@ -48,10 +63,21 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
-	
+
+
+func _process(delta: float) -> void:
 	tiremark1.emitting = is_drifting()
 	tiremark2.emitting = is_drifting()
 	smoke.emitting = is_drifting()
+	brake_light1.energy = int(is_braking) * 5
+	brake_light2.energy = int(is_braking) * 5
+	
+	if is_drifting():
+		if not tirescreech.playing:
+			tirescreech.play()
+	else:
+		if tirescreech.playing:
+			tirescreech.stop()
 	
 	
 #	print(linear_velocity.length())
@@ -64,7 +90,7 @@ func remove_orthogonal_velocity() -> void:
 
 
 func is_drifting() -> bool:
-	return (is_braking and linear_velocity.length() > 50) or abs(get_lateral_velocity()) > 100
+	return (is_braking and linear_velocity.length() > 50) or abs(get_lateral_velocity()) > 175
 
 
 func get_lateral_velocity() -> float:
