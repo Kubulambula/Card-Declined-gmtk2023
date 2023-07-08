@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dy4p27it41a4c"]
 
 [ext_resource type="Script" path="res://scenes/car.gd" id="1_na8kg"]
-[ext_resource type="Texture2D" uid="uid://c413w5irodrag" path="res://assets/cars/ambulance.png" id="2_2d8d2"]
+[ext_resource type="Texture2D" uid="uid://b54veqqqh6qqj" path="res://assets/cars/ambulance_open.png" id="3_aexym"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_ao7sn"]
 [ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
 [ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="6_mq5af"]
@@ -117,7 +117,7 @@ gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_okphn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_2d8d2")
+texture = ExtResource("3_aexym")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Sprite2D"]
 position = Vector2(15, -12)

@@ -2,6 +2,9 @@ extends RigidBody2D
 
 signal stopped
 
+const CLOSED = preload("res://assets/cars/ambulance.png")
+const OPENED = preload("res://assets/cars/ambulance_open.png")
+
 @onready var tiremark1 = %TireMark1
 @onready var tiremark2 = %TireMark2
 @onready var smoke = %Smoke
@@ -9,7 +12,11 @@ signal stopped
 @onready var brake_light2 = %BrakeLight2
 @onready var tirescreech = %TireScreech
 
-var can_drive: bool = false
+var can_drive: bool = false:
+	set(value):
+		if value:
+			$Sprite2D.texture = CLOSED
+		can_drive = value
 
 var notify_stop: bool = false
 
@@ -85,12 +92,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		if tirescreech.playing:
 			tirescreech.stop()
 	
-	
-	print(angular_velocity)
 	if notify_stop:
 		if linear_velocity.length() < 25 and angular_velocity < 0.05:
 			notify_stop = false
 			stopped.emit()
+			$Sprite2D.texture = OPENED
 
 
 func remove_orthogonal_velocity() -> void:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://3u5dup7nlt8m"]
+[gd_scene load_steps=4 format=3 uid="uid://3u5dup7nlt8m"]
 
 [ext_resource type="TileSet" uid="uid://bsig7dbfg8l6e" path="res://assets/tilemaps/test.tres" id="1_nqnne"]
 [ext_resource type="PackedScene" uid="uid://dy4p27it41a4c" path="res://scenes/car.tscn" id="2_f1n37"]
+[ext_resource type="PackedScene" uid="uid://bdfffi0qduyfu" path="res://scenes/player.tscn" id="4_qpk8s"]
 
 [node name="art_test" type="Node2D"]
 
@@ -56,5 +57,8 @@ tile_set = ExtResource("1_nqnne")
 format = 2
 layer_0/tile_data = PackedInt32Array(-458754, 7, 4, -458753, 65543, 4, -524288, 65543, 4, -524287, 65543, 4, -393218, 7, 5, -393217, 196615, 4, -393208, 196615, 4, -458744, 262151, 4, -524285, 262151, 4, -524284, 65543, 4, -524283, 65543, 4, -524282, 65543, 4, -327673, 65543, 4, -327672, 65543, 4, -327674, 65543, 4, -327675, 65543, 4)
 
-[node name="Node2D" parent="." instance=ExtResource("2_f1n37")]
-position = Vector2(493, -25)
+[node name="Car" parent="." instance=ExtResource("2_f1n37")]
+position = Vector2(1819, 587)
+
+[node name="Player" parent="." instance=ExtResource("4_qpk8s")]
+position = Vector2(1599, 576)
