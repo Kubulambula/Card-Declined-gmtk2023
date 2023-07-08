@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scenes/car.gd" id="1_na8kg"]
 [ext_resource type="Texture2D" uid="uid://b54veqqqh6qqj" path="res://assets/cars/ambulance_open.png" id="3_aexym"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_ao7sn"]
-[ext_resource type="Texture2D" uid="uid://mociklnk1r5f" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
+[ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
 [ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="6_mq5af"]
-[ext_resource type="Texture2D" uid="uid://chiw6ru3x01ag" path="res://assets/particles/smoke.png" id="6_pue5m"]
+[ext_resource type="Texture2D" uid="uid://owk203cxcnf6" path="res://assets/particles/smoke.png" id="6_pue5m"]
 [ext_resource type="AudioStream" uid="uid://chcxxvdokgovi" path="res://assets/sound/siren.ogg" id="7_5e14m"]
 
 [sub_resource type="Gradient" id="Gradient_okphn"]
@@ -87,7 +87,6 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 size = Vector2(75, 100)
 
 [node name="Car" type="RigidBody2D"]
-inertia = 1.0
 gravity_scale = 0.0
 can_sleep = false
 linear_damp = 0.5
@@ -116,12 +115,6 @@ particle_flag_align_y = true
 gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_okphn")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(0.0862745, 0.0823529, 0.329412, 0.498039)
-position = Vector2(1.775, -0.5)
-scale = Vector2(1.7045, 2.8)
-texture = ExtResource("3_ao7sn")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.15, 1.15)
 texture = ExtResource("3_aexym")
@@ -146,9 +139,6 @@ texture_scale = 3.0
 libraries = {
 "": SubResource("AnimationLibrary_2uv7d")
 }
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -73, 28, -73, 38, -67, 44, -59, 44, 70, 40, 74, -38, 74, -42, 70, -42, -57, -39, -67, -30, -73)
 
 [node name="Smoke" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -215,4 +205,7 @@ position = Vector2(-80, -10)
 shape = SubResource("RectangleShape2D_3hqtk")
 
 [node name="GetOutPosition" type="Node2D" parent="DoorArea"]
-position = Vector2(-200, -10)
+position = Vector2(-100, -10)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -73, 28, -73, 38, -67, 44, -59, 44, 70, 40, 74, -38, 74, -42, 70, -42, -57, -39, -67, -30, -73)
