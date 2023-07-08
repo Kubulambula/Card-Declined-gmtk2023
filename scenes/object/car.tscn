@@ -45,7 +45,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Woo:visible")
+tracks/2/path = NodePath("Woo:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -57,7 +57,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Wee:visible")
+tracks/3/path = NodePath("Wee:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -69,7 +69,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Woo:position")
+tracks/4/path = NodePath("Woo:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -81,7 +81,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../Wee:position")
+tracks/5/path = NodePath("Wee:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -127,7 +127,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Woo:visible")
+tracks/0/path = NodePath("Woo:visible")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -139,7 +139,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Wee:visible")
+tracks/1/path = NodePath("Wee:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -151,7 +151,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Woo:position")
+tracks/2/path = NodePath("Woo:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -163,7 +163,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Wee:position")
+tracks/3/path = NodePath("Wee:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -227,6 +227,23 @@ color_ramp = SubResource("Gradient_okphn")
 scale = Vector2(1.15, 1.15)
 texture = ExtResource("2_ywh1v")
 
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_2uv7d")
+}
+
+[node name="Wee" type="Sprite2D" parent="Sprite2D"]
+visible = false
+position = Vector2(-95, 60)
+scale = Vector2(0.869565, 0.869565)
+texture = ExtResource("5_6sqgx")
+
+[node name="Woo" type="Sprite2D" parent="Sprite2D"]
+visible = false
+position = Vector2(127, 22)
+scale = Vector2(0.869565, 0.869565)
+texture = ExtResource("6_pk8fs")
+
 [node name="PointLight2D2" type="PointLight2D" parent="Sprite2D"]
 position = Vector2(15, -12)
 scale = Vector2(0.4575, 0.4575)
@@ -247,22 +264,6 @@ texture_scale = 3.0
 libraries = {
 "": SubResource("AnimationLibrary_2uv7d")
 }
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-"": SubResource("AnimationLibrary_2uv7d")
-}
-
-[node name="Wee" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-95, 60)
-texture = ExtResource("5_6sqgx")
-
-[node name="Woo" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(127, 22)
-texture = ExtResource("6_pk8fs")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -72, 24, -72, 40, -56, 40, -48, 40, 64, 32, 72, -32, 72, -40, 64, -40, -40, -40, -56, -24, -72)
