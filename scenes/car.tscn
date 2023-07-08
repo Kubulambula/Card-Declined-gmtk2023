@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scenes/car.gd" id="1_na8kg"]
 [ext_resource type="Texture2D" uid="uid://b54veqqqh6qqj" path="res://assets/cars/ambulance_open.png" id="3_aexym"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_ao7sn"]
-[ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
+[ext_resource type="Texture2D" uid="uid://mociklnk1r5f" path="res://assets/particles/tiremark.png" id="4_o8cd0"]
 [ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="6_mq5af"]
-[ext_resource type="Texture2D" uid="uid://owk203cxcnf6" path="res://assets/particles/smoke.png" id="6_pue5m"]
+[ext_resource type="Texture2D" uid="uid://chiw6ru3x01ag" path="res://assets/particles/smoke.png" id="6_pue5m"]
 [ext_resource type="AudioStream" uid="uid://chcxxvdokgovi" path="res://assets/sound/siren.ogg" id="7_5e14m"]
 
 [sub_resource type="Gradient" id="Gradient_okphn"]
@@ -115,6 +115,12 @@ texture = ExtResource("4_o8cd0")
 particle_flag_align_y = true
 gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_okphn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.0862745, 0.0823529, 0.329412, 0.498039)
+position = Vector2(1.775, -0.5)
+scale = Vector2(1.7045, 2.8)
+texture = ExtResource("3_ao7sn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_aexym")

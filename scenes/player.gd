@@ -16,9 +16,11 @@ func _physics_process(delta: float) -> void:
 		return
 	var direction := Input.get_vector("left", "right", "forward", "back")
 	if direction:
+		$AnimationPlayer.play("walking")
 		velocity += direction * acceleration * delta
 		velocity = velocity.limit_length(max_speed)
 	else:
+		$AnimationPlayer.play("RESET")
 		if velocity.length() > (friction * delta):
 			velocity -= velocity.normalized() * friction * delta
 		else:
