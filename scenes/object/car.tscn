@@ -199,6 +199,21 @@ max_value = 0.5
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0952381, 0.489474), 0.0, 0.0, 0, 0, Vector2(0.866667, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
+[sub_resource type="Animation" id="Animation_xmdle"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Screech/ScreechSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_vk4yv"]
 resource_name = "screech"
 length = 0.5
@@ -214,21 +229,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(10, 10), Vector2(-10, -10), Vector2(10, 10), Vector2(-10, -10), Vector2(10, 10), Vector2(-10, -10)]
-}
-
-[sub_resource type="Animation" id="Animation_xmdle"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Screech/ScreechSprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3o48i"]
@@ -375,6 +375,8 @@ amount = 1
 lifetime = 0.4
 one_shot = true
 texture = ExtResource("10_skl46")
+emission_shape = 1
+emission_sphere_radius = 125.0
 gravity = Vector2(0, 0)
 angle_min = -25.0
 angle_max = 35.0
@@ -394,13 +396,11 @@ scale = Vector2(0.3, 0.3)
 [node name="Wee" type="Sprite2D" parent="CanvasLayer/WeeWoo"]
 visible = false
 position = Vector2(-95, 60)
-scale = Vector2(1, 1)
 texture = ExtResource("5_6sqgx")
 
 [node name="Woo" type="Sprite2D" parent="CanvasLayer/WeeWoo"]
 visible = false
 position = Vector2(127, 22)
-scale = Vector2(1, 1)
 texture = ExtResource("6_pk8fs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
@@ -411,6 +411,7 @@ libraries = {
 
 [node name="Screech" type="Node2D" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(620, 360)
 rotation = -0.349066
 
