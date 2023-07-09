@@ -60,7 +60,9 @@ var input: Vector2 = Vector2.ZERO
 func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("ui_page_down"):
-		Global.select_new_patient()
+		pass
+#		Global.select_new_patient()
+		Global.do_event()
 	
 	if not can_drive:
 		return
@@ -129,7 +131,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			%Door.play()
 	
 	last_linear_velocity = state.linear_velocity
-	print("l: ", linear_velocity.length())
+#	print("l: ", linear_velocity.length())
 #	print("a: ", angular_velocity)
 
 

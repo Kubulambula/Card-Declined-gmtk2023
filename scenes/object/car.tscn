@@ -194,7 +194,7 @@ offsets = PackedFloat32Array(0, 0.386139, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hqtk"]
-size = Vector2(100, 125)
+size = Vector2(300, 125)
 
 [sub_resource type="Curve" id="Curve_dshbu"]
 max_value = 0.5
@@ -375,7 +375,6 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Shape" type="CollisionShape2D" parent="DoorArea"]
-position = Vector2(-90, 0)
 shape = SubResource("RectangleShape2D_3hqtk")
 
 [node name="GetOutPosition" type="Node2D" parent="DoorArea"]

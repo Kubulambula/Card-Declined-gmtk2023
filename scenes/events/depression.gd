@@ -4,7 +4,7 @@ extends Node2D
 
 var actions = ["back", "left", "right", "forward", "e", "q"]
 var action_index = 0
-var active: bool = true
+var active: bool = false
 var textures = {
 	"back": preload("res://assets/events/s.png"),
 	"forward": preload("res://assets/events/w.png"),
@@ -50,5 +50,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "3":
-		print("done")
-		return
+		Global.select_new_patient()
+		queue_free()
+	elif anim_name == "0":
+		active = true

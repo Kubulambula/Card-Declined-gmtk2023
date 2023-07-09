@@ -287,6 +287,7 @@ texture = ExtResource("1_k3gf1")
 
 [node name="AnimationPlay" type="AnimationPlayer" parent="Left/Main"]
 root_node = NodePath("../../..")
+autoplay = "fade_in"
 libraries = {
 "": SubResource("AnimationLibrary_s64a2")
 }
@@ -348,7 +349,7 @@ theme_override_styles/slider = SubResource("StyleBoxTexture_16cpy")
 theme_override_styles/grabber_area = SubResource("StyleBoxTexture_40pnh")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_kbyq6")
 max_value = 1.0
-step = 0.1
+step = 0.01
 
 [node name="Music" type="HSlider" parent="Right"]
 custom_minimum_size = Vector2(300, 0)
@@ -363,7 +364,7 @@ theme_override_styles/slider = SubResource("StyleBoxTexture_3tau2")
 theme_override_styles/grabber_area = SubResource("StyleBoxTexture_73wfa")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_frbus")
 max_value = 1.0
-step = 0.1
+step = 0.01
 
 [node name="Label" type="Label" parent="Right"]
 offset_left = 700.0
@@ -386,5 +387,6 @@ text = "SFX
 "
 
 [connection signal="pressed" from="Left/Main/PLAY" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Left/Main/QUIT" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Right/SFX" to="." method="_on_sfx_value_changed"]
 [connection signal="value_changed" from="Right/Music" to="." method="_on_music_value_changed"]
