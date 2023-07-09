@@ -1,10 +1,10 @@
 [gd_scene load_steps=28 format=3 uid="uid://72an63mm5387"]
 
 [ext_resource type="Script" path="res://scenes/object/car.gd" id="1_7nlux"]
-[ext_resource type="Texture2D" uid="uid://mociklnk1r5f" path="res://assets/particles/tiremark.png" id="1_8atxf"]
+[ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="1_8atxf"]
 [ext_resource type="Texture2D" uid="uid://b54veqqqh6qqj" path="res://assets/cars/ambulance_open.png" id="2_ywh1v"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="3_j2hlj"]
-[ext_resource type="Texture2D" uid="uid://chiw6ru3x01ag" path="res://assets/particles/smoke.png" id="4_sl6uw"]
+[ext_resource type="Texture2D" uid="uid://owk203cxcnf6" path="res://assets/particles/smoke.png" id="4_sl6uw"]
 [ext_resource type="Texture2D" uid="uid://dl8im6klqu1mp" path="res://assets/particles/WEE.png" id="5_6sqgx"]
 [ext_resource type="AudioStream" uid="uid://dv8e0p5jdmest" path="res://assets/sound/tires_squal_loop.wav" id="5_qw33i"]
 [ext_resource type="AudioStream" uid="uid://chcxxvdokgovi" path="res://assets/sound/siren.ogg" id="6_1ymd3"]
@@ -335,6 +335,7 @@ texture_scale = 0.5
 [node name="TireScreech" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("5_qw33i")
+bus = &"SFX"
 
 [node name="Siren" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -342,6 +343,7 @@ stream = ExtResource("6_1ymd3")
 volume_db = 1.0
 max_distance = 3500.0
 panning_strength = 2.0
+bus = &"SFX"
 
 [node name="Radio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -349,20 +351,24 @@ stream = ExtResource("8_miya8")
 volume_db = -2.0
 autoplay = true
 max_distance = 5000.0
+bus = &"Music"
 
 [node name="Door" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_tk284")
 volume_db = 12.0
+bus = &"SFX"
 
 [node name="Impact" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("8_v31s8")
+bus = &"SFX"
 
 [node name="Engine" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("11_5tmw2")
 autoplay = true
+bus = &"SFX"
 
 [node name="DoorArea" type="Area2D" parent="."]
 collision_layer = 2
