@@ -10,6 +10,7 @@ extends Node2D
 
 func _ready() -> void:
 	icon.texture = icon_texture
+	marker.self_modulate = marker_color
 
 
 func _process(_delta: float) -> void:

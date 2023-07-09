@@ -5,6 +5,9 @@ signal stopped
 const CLOSED = preload("res://assets/cars/ambulance.png")
 const OPENED = preload("res://assets/cars/ambulance_open.png")
 
+var engine_idle: float = 1
+var engine_max: float = 3
+
 @onready var tiremark1 = %TireMark1
 @onready var tiremark2 = %TireMark2
 @onready var smoke = %Smoke
@@ -17,6 +20,12 @@ const OPENED = preload("res://assets/cars/ambulance_open.png")
 @onready var siren = %Siren
 @onready var screech = %Screech
 @onready var impact_particle = %ImpactParticle
+@onready var engine = %Engine
+
+
+func _ready() -> void:
+	Global.music_player = %Radio
+
 
 var can_drive: bool = false:
 	set(value):
@@ -31,8 +40,8 @@ var drift_factor: float = 0.9
 
 var is_braking: bool = false
 
-var turn_acceleration: float = 0.15
-var slow_turn_acceleration: float = 0.1
+var turn_acceleration: float = 0.14
+var slow_turn_acceleration: float = 0.08
 var max_turn_speed: float = 4
 
 var forward_acceleration: float = 1100
@@ -49,6 +58,10 @@ var input: Vector2 = Vector2.ZERO
 
 
 func _input(event: InputEvent) -> void:
+	
+	if Input.is_action_just_pressed("ui_page_down"):
+		engine.pitch_scale = 2
+	
 	if not can_drive:
 		return
 	
@@ -160,6 +173,16 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _process(delta: float) -> void:
+	var velocity = linear_velocity.length()
+	var new_pitch = remap(max(400, velocity), 400, max_forward_speed - 200, engine_idle, engine_max)
+	engine.pitch_scale = lerp(engine.pitch_scale, new_pitch, delta * 0.5)
+#	if (velocity > 1150 and velocity < 1250) or (velocity > 1350 and velocity < 1450) and engine.pitch_scale > 1.9:
+#		print(engine.pitch_scale)
+#		engine.pitch_scale = 1.9
+		
+#	match linear_velocity.length():
+#		600, 1000, 1300:
+	
 	var car_position_on_screen = get_global_transform_with_canvas().origin
 	weewoo.position = car_position_on_screen
 	impact_particle.position = car_position_on_screen

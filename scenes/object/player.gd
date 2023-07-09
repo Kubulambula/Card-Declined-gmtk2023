@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 var max_speed = 400.0
+var turn_speed = 10
 var acceleration = 4000
 var friction = 2500
 
@@ -15,12 +16,13 @@ func _init() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	look_at(get_global_mouse_position())
+#	look_at(get_global_mouse_position())
 	
 	if inside_car:
 		return
 	
 	var direction := Input.get_vector("left", "right", "forward", "back")
+	rotation = lerp_angle(rotation, direction.angle(), delta * turn_speed)
 	if direction:
 		$AnimationPlayer.play("walking")
 		velocity += direction * acceleration * delta
@@ -31,7 +33,6 @@ func _physics_process(delta: float) -> void:
 			velocity -= velocity.normalized() * friction * delta
 		else:
 			velocity = Vector2.ZERO
-	
 	
 	move_and_slide()
 
