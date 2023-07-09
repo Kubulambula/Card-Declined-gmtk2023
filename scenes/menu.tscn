@@ -1,11 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://dx18uw7r3p8aa"]
+[gd_scene load_steps=38 format=3 uid="uid://dx18uw7r3p8aa"]
 
+[ext_resource type="Script" path="res://scenes/menu.gd" id="1_07ybj"]
 [ext_resource type="Texture2D" uid="uid://cq6jmtk2lv68a" path="res://assets/ui/menu_terminal.png" id="1_k3gf1"]
 [ext_resource type="Texture2D" uid="uid://dsex85ooo34ry" path="res://assets/ui/play.png" id="2_q1w5a"]
+[ext_resource type="Texture2D" uid="uid://45hstrgeb8eg" path="res://assets/ui/play_hover.png" id="3_xvtlx"]
 [ext_resource type="Texture2D" uid="uid://col12ve7xehda" path="res://assets/ui/quit.png" id="3_yphfk"]
 [ext_resource type="Texture2D" uid="uid://byw3r5nc831bk" path="res://assets/ui/beep.png" id="4_dajai"]
+[ext_resource type="Texture2D" uid="uid://cyk8ixovccl6p" path="res://assets/ui/play_pressed.png" id="4_oc1af"]
 [ext_resource type="Texture2D" uid="uid://2dbvf1eua3e7" path="res://assets/ui/card.png" id="5_4u1uq"]
 [ext_resource type="Texture2D" uid="uid://brd0nsfe6y56o" path="res://assets/ui/logo.png" id="6_5edgf"]
+[ext_resource type="Texture2D" uid="uid://mf052iby2xnk" path="res://assets/ui/quit_hover.png" id="6_7nyec"]
+[ext_resource type="Texture2D" uid="uid://cgncadhvsxi" path="res://assets/ui/quit_pressed.png" id="7_ow3j4"]
+[ext_resource type="Texture2D" uid="uid://crx2uhusundde" path="res://assets/ui/sound.png" id="11_4qoxb"]
+[ext_resource type="Texture2D" uid="uid://c0tf46copfwk3" path="res://assets/ui/slider.png" id="11_t5uqu"]
+[ext_resource type="Texture2D" uid="uid://jolnyll58rau" path="res://assets/ui/slider_blue.png" id="12_ci1dp"]
+[ext_resource type="Texture2D" uid="uid://c7g8mufvj38yl" path="res://assets/ui/slider_red.png" id="12_xnrjg"]
+[ext_resource type="Texture2D" uid="uid://cvhpsou2bej5b" path="res://assets/ui/sound_hover.png" id="13_rv2i7"]
+[ext_resource type="Texture2D" uid="uid://cw3wc8fc5sxwn" path="res://assets/ui/music.png" id="14_167e8"]
+[ext_resource type="FontFile" uid="uid://dhwcqfcbau6w6" path="res://assets/ui/Century Gothic.TTF" id="16_kbrqu"]
+[ext_resource type="Texture2D" uid="uid://2cae7hhylwok" path="res://assets/ui/music_hover.png" id="17_vj3fm"]
 
 [sub_resource type="Animation" id="Animation_i27xg"]
 resource_name = "card"
@@ -13,7 +26,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Extra/Card:visible")
+tracks/0/path = NodePath("Left/Extra/Card:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +38,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Extra/Card:position")
+tracks/1/path = NodePath("Left/Extra/Card:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +50,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Extra/Beep:visible")
+tracks/2/path = NodePath("Left/Extra/Beep:visible")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -49,7 +62,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Extra/Beep:position")
+tracks/3/path = NodePath("Left/Extra/Beep:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -64,7 +77,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Extra/Card:visible")
+tracks/0/path = NodePath("Left/Extra/Card:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -76,7 +89,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Extra/Card:position")
+tracks/1/path = NodePath("Left/Extra/Card:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -88,7 +101,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Extra/Beep:visible")
+tracks/2/path = NodePath("Left/Extra/Beep:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -100,7 +113,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Extra/Beep:position")
+tracks/3/path = NodePath("Left/Extra/Beep:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -109,14 +122,138 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(476, 226)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Left:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Right:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.113725, 0.160784, 0.4, 0.258824)]
+}
+
+[sub_resource type="Animation" id="Animation_8lh78"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-500, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(700, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.113725, 0.160784, 0.4, 0), Color(0.113725, 0.160784, 0.4, 0.258824)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s64a2"]
 _data = {
 "RESET": SubResource("Animation_7xxn2"),
-"card": SubResource("Animation_i27xg")
+"card": SubResource("Animation_i27xg"),
+"fade_in": SubResource("Animation_8lh78")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jua7r"]
+texture = ExtResource("2_q1w5a")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxlww"]
+texture = ExtResource("3_xvtlx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s7x83"]
+texture = ExtResource("4_oc1af")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwl5o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ufw6g"]
+texture = ExtResource("3_yphfk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o12nh"]
+texture = ExtResource("6_7nyec")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d756k"]
+texture = ExtResource("7_ow3j4")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ps1ir"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_16cpy"]
+texture = ExtResource("11_t5uqu")
+texture_margin_top = 25.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_40pnh"]
+texture = ExtResource("12_xnrjg")
+texture_margin_top = 25.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kbyq6"]
+texture = ExtResource("12_xnrjg")
+texture_margin_top = 25.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3tau2"]
+texture = ExtResource("11_t5uqu")
+texture_margin_top = 25.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73wfa"]
+texture = ExtResource("12_ci1dp")
+texture_margin_top = 25.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_frbus"]
+texture = ExtResource("12_ci1dp")
+texture_margin_top = 25.0
+
 [node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_07ybj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -134,50 +271,120 @@ offset_right = 363.0
 offset_bottom = 90.0
 text = "Card Declined (Is it a good name name?)"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationFade" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_s64a2")
 }
 
-[node name="Main" type="Node2D" parent="."]
+[node name="Left" type="Node2D" parent="."]
 
-[node name="MenuTerminal" type="Sprite2D" parent="Main"]
+[node name="Main" type="Node2D" parent="Left"]
+
+[node name="MenuTerminal" type="Sprite2D" parent="Left/Main"]
 position = Vector2(216, 355)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_k3gf1")
 
-[node name="Play" type="Sprite2D" parent="Main"]
-position = Vector2(213, 277)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_q1w5a")
+[node name="AnimationPlay" type="AnimationPlayer" parent="Left/Main"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_s64a2")
+}
 
-[node name="Quit" type="Sprite2D" parent="Main"]
-position = Vector2(216, 406)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_yphfk")
+[node name="PLAY" type="Button" parent="Left/Main"]
+offset_left = 95.0
+offset_top = 202.0
+offset_right = 103.0
+offset_bottom = 210.0
+scale = Vector2(29.9564, 18.8569)
+theme_override_styles/normal = SubResource("StyleBoxTexture_jua7r")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jxlww")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_s7x83")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gwl5o")
 
-[node name="Extra" type="Node2D" parent="."]
+[node name="QUIT" type="Button" parent="Left/Main"]
+offset_left = 109.0
+offset_top = 350.0
+offset_right = 117.0
+offset_bottom = 358.0
+scale = Vector2(26.4699, 13.6818)
+theme_override_styles/normal = SubResource("StyleBoxTexture_ufw6g")
+theme_override_styles/hover = SubResource("StyleBoxTexture_o12nh")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_d756k")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ps1ir")
 
-[node name="Beep" type="Sprite2D" parent="Extra"]
+[node name="Extra" type="Node2D" parent="Left"]
+
+[node name="Beep" type="Sprite2D" parent="Left/Extra"]
 visible = false
 position = Vector2(476, 226)
 rotation = 0.282743
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_dajai")
 
-[node name="Card" type="Sprite2D" parent="Extra"]
+[node name="Card" type="Sprite2D" parent="Left/Extra"]
 visible = false
 position = Vector2(358, -206)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_4u1uq")
 
-[node name="Logo" type="Sprite2D" parent="."]
-position = Vector2(810, 194)
-scale = Vector2(0.6, 0.6)
+[node name="Right" type="Node2D" parent="."]
+
+[node name="Logo" type="Sprite2D" parent="Right"]
+position = Vector2(850, 173)
+scale = Vector2(0.559321, 0.559321)
 texture = ExtResource("6_5edgf")
 
-[node name="HSlider" type="HSlider" parent="."]
-offset_left = 558.0
-offset_top = 418.0
-offset_right = 566.0
-offset_bottom = 434.0
+[node name="SFX" type="HSlider" parent="Right"]
+custom_minimum_size = Vector2(300, 0)
+offset_left = 780.0
+offset_top = 545.0
+offset_right = 1080.0
+offset_bottom = 585.0
+theme_override_icons/grabber = ExtResource("11_4qoxb")
+theme_override_icons/grabber_highlight = ExtResource("13_rv2i7")
+theme_override_icons/grabber_disabled = ExtResource("11_4qoxb")
+theme_override_styles/slider = SubResource("StyleBoxTexture_16cpy")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_40pnh")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_kbyq6")
+max_value = 1.0
+step = 0.1
+
+[node name="Music" type="HSlider" parent="Right"]
+custom_minimum_size = Vector2(300, 0)
+offset_left = 780.0
+offset_top = 500.0
+offset_right = 1080.0
+offset_bottom = 534.0
+theme_override_icons/grabber = ExtResource("14_167e8")
+theme_override_icons/grabber_highlight = ExtResource("17_vj3fm")
+theme_override_icons/grabber_disabled = ExtResource("14_167e8")
+theme_override_styles/slider = SubResource("StyleBoxTexture_3tau2")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_73wfa")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_frbus")
+max_value = 1.0
+step = 0.1
+
+[node name="Label" type="Label" parent="Right"]
+offset_left = 700.0
+offset_top = 500.0
+offset_right = 767.0
+offset_bottom = 534.0
+theme_override_fonts/font = ExtResource("16_kbrqu")
+theme_override_font_sizes/font_size = 24
+text = "Music
+"
+
+[node name="Label2" type="Label" parent="Right"]
+offset_left = 725.0
+offset_top = 550.0
+offset_right = 792.0
+offset_bottom = 584.0
+theme_override_fonts/font = ExtResource("16_kbrqu")
+theme_override_font_sizes/font_size = 24
+text = "SFX
+"
+
+[connection signal="pressed" from="Left/Main/PLAY" to="." method="_on_play_pressed"]
+[connection signal="value_changed" from="Right/SFX" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="Right/Music" to="." method="_on_music_value_changed"]
