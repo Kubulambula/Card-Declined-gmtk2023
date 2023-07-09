@@ -38,6 +38,7 @@ func select_new_patient() -> void:
 	patient = new_patient
 	if patient_marker.get_parent():
 		patient_marker.get_parent().remove_child(patient_marker)
+	patient_marker.hide_on_screen = false
 	patient.add_child(patient_marker)
 	patient_marker.position = Vector2.ZERO
 
@@ -47,9 +48,12 @@ func get_random_poi() -> Vector2:
 	return poi_list[poi_index % poi_list.size()]
 
 
-func set_music_volume(value: int) -> void:
+
+func set_master_volume(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(value))
+
+func set_music_volume(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value))
 
-
-func set_sfx_volume(value: int) -> void:
+func set_sfx_volume(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(value))

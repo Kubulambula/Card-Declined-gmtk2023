@@ -73,8 +73,9 @@ func _input(event: InputEvent) -> void:
 	if input.y == -1:
 		input.y = -0.5
 	
-	if input.y == -1 or transform.y.dot(linear_velocity.normalized()) > 0: #is going backward
-		input.x = -input.x
+	if not (input.y == 1 and abs(linear_velocity.length()) < 400):
+		if input.y == -1 or transform.y.dot(linear_velocity.normalized()) > 0: #is going backward
+			input.x = -input.x
 	
 	if Input.is_key_pressed(KEY_Q):
 		if lights.is_playing():
@@ -95,7 +96,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		drift_factor = 0.95
 	else:
 		linear_damp = 0.5
-		angular_damp = 1
+		angular_damp = 1 if linear_velocity.length() > 300 else 4
 		drift_factor = 0.85
 	
 	apply_engine(state)
@@ -128,7 +129,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			%Door.play()
 	
 	last_linear_velocity = state.linear_velocity
-#	print("l: ", linear_velocity.length())
+	print("l: ", linear_velocity.length())
 #	print("a: ", angular_velocity)
 
 

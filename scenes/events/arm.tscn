@@ -1,0 +1,242 @@
+[gd_scene load_steps=14 format=3 uid="uid://bmmwko7c25ph4"]
+
+[ext_resource type="Script" path="res://scenes/events/arm.gd" id="1_1ojya"]
+[ext_resource type="Texture2D" uid="uid://rrhj67fp35lx" path="res://assets/events/hand/BG1.png" id="1_67dj7"]
+[ext_resource type="Texture2D" uid="uid://c5j1ys4ys3on1" path="res://assets/events/hand/BG2.png" id="2_8gved"]
+[ext_resource type="Texture2D" uid="uid://0n4nqqbxi2vp" path="res://assets/events/hand/guy1_body.png" id="4_ses1q"]
+[ext_resource type="Texture2D" uid="uid://dcdbyh7r5diy3" path="res://assets/events/hand/guy1_hands.png" id="5_joeg3"]
+[ext_resource type="Texture2D" uid="uid://ca8h7thgp4dbv" path="res://assets/events/hand/guy2.png" id="6_78gx8"]
+[ext_resource type="Texture2D" uid="uid://oaupkcvidifl" path="res://assets/events/s.png" id="7_uu4um"]
+
+[sub_resource type="Animation" id="Animation_hhkus"]
+resource_name = "0"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guy2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BG2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Guy1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Guy1/GuyArm:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_efi57"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guy2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BG2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Guy1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Guy1/GuyArm:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_kqw86"]
+resource_name = "1"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guy1/GuyArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(600, 90), Vector2(630, 90), Vector2(600, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_k4bym"]
+resource_name = "2"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guy1/GuyArm:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(600, 90), Vector2(570, 90), Vector2(600, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_n3atd"]
+resource_name = "3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guy1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BG2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Guy2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2tpq"]
+_data = {
+"0": SubResource("Animation_hhkus"),
+"1": SubResource("Animation_kqw86"),
+"2": SubResource("Animation_k4bym"),
+"3": SubResource("Animation_n3atd"),
+"RESET": SubResource("Animation_efi57")
+}
+
+[node name="Arm" type="Node2D"]
+script = ExtResource("1_1ojya")
+
+[node name="BG1" type="Sprite2D" parent="."]
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("1_67dj7")
+centered = false
+
+[node name="BG2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("2_8gved")
+centered = false
+
+[node name="Guy1" type="Sprite2D" parent="."]
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("4_ses1q")
+centered = false
+
+[node name="GuyArm" type="Sprite2D" parent="Guy1"]
+position = Vector2(600, 90)
+texture = ExtResource("5_joeg3")
+centered = false
+
+[node name="Guy2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("6_78gx8")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n2tpq")
+}
+
+[node name="Key1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(481, 130)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_uu4um")
+
+[node name="Key2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(742, 122)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_uu4um")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
