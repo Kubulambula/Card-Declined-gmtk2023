@@ -25,7 +25,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	await get_tree().create_timer(2).timeout
-	notification_node.add_to_queue("Get in the car and teach them a lesson. If you can't pay, don't go to the doctor!", 10)
+	notification_node.add_to_queue("Get in the car and teach them a lesson. If you can't pay, don't go to the doctor!", 15)
 
 
 func _physics_process(delta: float) -> void:

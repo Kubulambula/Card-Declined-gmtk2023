@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dx18uw7r3p8aa"]
+[gd_scene load_steps=44 format=3 uid="uid://dx18uw7r3p8aa"]
 
 [ext_resource type="Script" path="res://scenes/menu.gd" id="1_07ybj"]
 [ext_resource type="Texture2D" uid="uid://cq6jmtk2lv68a" path="res://assets/ui/menu_terminal.png" id="1_k3gf1"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://mf052iby2xnk" path="res://assets/ui/quit_hover.png" id="6_7nyec"]
 [ext_resource type="Texture2D" uid="uid://cgncadhvsxi" path="res://assets/ui/quit_pressed.png" id="7_ow3j4"]
 [ext_resource type="Texture2D" uid="uid://crx2uhusundde" path="res://assets/ui/sound.png" id="11_4qoxb"]
+[ext_resource type="Texture2D" uid="uid://clsn4cnj4cfiy" path="res://assets/ui/q_hint.png" id="11_br2cp"]
 [ext_resource type="Texture2D" uid="uid://c0tf46copfwk3" path="res://assets/ui/slider.png" id="11_t5uqu"]
 [ext_resource type="Texture2D" uid="uid://jolnyll58rau" path="res://assets/ui/slider_blue.png" id="12_ci1dp"]
 [ext_resource type="Texture2D" uid="uid://c7g8mufvj38yl" path="res://assets/ui/slider_red.png" id="12_xnrjg"]
@@ -328,6 +329,12 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_ufw6g")
 theme_override_styles/hover = SubResource("StyleBoxTexture_o12nh")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_d756k")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ps1ir")
+
+[node name="QHint" type="Sprite2D" parent="Left/Main"]
+position = Vector2(139, 654)
+rotation = 0.174533
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("11_br2cp")
 
 [node name="Extra" type="Node2D" parent="Left"]
 
