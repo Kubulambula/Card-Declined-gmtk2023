@@ -1,7 +1,8 @@
-[gd_scene load_steps=38 format=3 uid="uid://dx18uw7r3p8aa"]
+[gd_scene load_steps=42 format=3 uid="uid://dx18uw7r3p8aa"]
 
 [ext_resource type="Script" path="res://scenes/menu.gd" id="1_07ybj"]
 [ext_resource type="Texture2D" uid="uid://cq6jmtk2lv68a" path="res://assets/ui/menu_terminal.png" id="1_k3gf1"]
+[ext_resource type="PackedScene" uid="uid://bmlag5l4alb0j" path="res://scenes/intro.tscn" id="2_cj4bl"]
 [ext_resource type="Texture2D" uid="uid://dsex85ooo34ry" path="res://assets/ui/play.png" id="2_q1w5a"]
 [ext_resource type="Texture2D" uid="uid://45hstrgeb8eg" path="res://assets/ui/play_hover.png" id="3_xvtlx"]
 [ext_resource type="Texture2D" uid="uid://col12ve7xehda" path="res://assets/ui/quit.png" id="3_yphfk"]
@@ -184,7 +185,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(700, 0), Vector2(0, 0)]
+"values": [Vector2(730, 0), Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -252,8 +253,66 @@ texture_margin_top = 25.0
 texture = ExtResource("12_ci1dp")
 texture_margin_top = 25.0
 
+[sub_resource type="Animation" id="Animation_dtrch"]
+resource_name = "intro_hide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/IntroHide:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.25098, 0.262745, 0.32549, 1), Color(0.25098, 0.262745, 0.32549, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4etwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/IntroHide:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.25098, 0.262745, 0.32549, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxlvr"]
+_data = {
+"RESET": SubResource("Animation_4etwh"),
+"intro_hide": SubResource("Animation_dtrch")
+}
+
 [node name="Menu" type="CanvasLayer"]
+process_mode = 3
+layer = 110
 script = ExtResource("1_07ybj")
+
+[node name="Intro" parent="." instance=ExtResource("2_cj4bl")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IntroHide" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25098, 0.262745, 0.32549, 0)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -287,7 +346,6 @@ texture = ExtResource("1_k3gf1")
 
 [node name="AnimationPlay" type="AnimationPlayer" parent="Left/Main"]
 root_node = NodePath("../../..")
-autoplay = "fade_in"
 libraries = {
 "": SubResource("AnimationLibrary_s64a2")
 }
@@ -350,6 +408,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxTexture_40pnh")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_kbyq6")
 max_value = 1.0
 step = 0.01
+value = 0.6
 
 [node name="Music" type="HSlider" parent="Right"]
 custom_minimum_size = Vector2(300, 0)
@@ -365,6 +424,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxTexture_73wfa")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_frbus")
 max_value = 1.0
 step = 0.01
+value = 0.6
 
 [node name="Label" type="Label" parent="Right"]
 offset_left = 700.0
@@ -386,6 +446,12 @@ theme_override_font_sizes/font_size = 24
 text = "SFX
 "
 
+[node name="AnimationPlayerIntroHide" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gxlvr")
+}
+
+[connection signal="animation_finished" from="Left/Main/AnimationPlay" to="." method="_on_animation_play_animation_finished"]
 [connection signal="pressed" from="Left/Main/PLAY" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Left/Main/QUIT" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Right/SFX" to="." method="_on_sfx_value_changed"]

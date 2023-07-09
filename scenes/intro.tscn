@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmlag5l4alb0j"]
+
+[ext_resource type="Script" path="res://scenes/intro.gd" id="1_fxj67"]
+[ext_resource type="Texture2D" uid="uid://dxewsrfdbfnye" path="res://assets/events/intro/intro1.png" id="2_x86ih"]
+[ext_resource type="FontFile" uid="uid://dhwcqfcbau6w6" path="res://assets/ui/Century Gothic.TTF" id="3_mj204"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sumv4"]
+font = ExtResource("3_mj204")
+font_size = 32
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_fxj67")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("2_x86ih")
+centered = false
+offset = Vector2(-35, 0)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 844.0
+offset_top = 668.0
+offset_right = 1502.0
+offset_bottom = 734.0
+text = "Press any key to continue..."
+label_settings = SubResource("LabelSettings_sumv4")

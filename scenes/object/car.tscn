@@ -347,6 +347,7 @@ bus = &"SFX"
 
 [node name="Radio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 stream = ExtResource("8_miya8")
 volume_db = -2.0
 autoplay = true
