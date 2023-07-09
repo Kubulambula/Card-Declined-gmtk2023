@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbji8c2cpya8e"
-path="res://.godot/imported/npc_body6.png-602ac5dc3776d98a64157f342dfc86a8.ctex"
+path="res://.godot/imported/npc_body5.png-33b2dab51d12281e9ea47a42c25f0e96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/npc_body6.png"
-dest_files=["res://.godot/imported/npc_body6.png-602ac5dc3776d98a64157f342dfc86a8.ctex"]
+source_file="res://assets/player/npc_body5.png"
+dest_files=["res://.godot/imported/npc_body5.png-33b2dab51d12281e9ea47a42c25f0e96.ctex"]
 
 [params]
 

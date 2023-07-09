@@ -347,6 +347,7 @@ bus = &"SFX"
 
 [node name="Radio" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 stream = ExtResource("8_miya8")
 volume_db = -2.0
 autoplay = true
@@ -436,5 +437,10 @@ rotation = -0.349066
 [node name="ScreechSprite" type="Sprite2D" parent="CanvasLayer/Screech"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("12_4mfem")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 180.0
+max_neighbors = 60
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

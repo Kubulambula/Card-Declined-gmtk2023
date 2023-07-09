@@ -9,6 +9,10 @@ var hair = preload("res://scenes/events/hair.tscn")
 const npc = preload("res://scenes/object/npc.tscn")
 var patient_marker = preload("res://scenes/object/off_screen_marker.tscn").instantiate()
 
+
+
+var menu_visible = true
+
 var map
 var player: Node = null
 var poi_list: Array[Vector2] = [Vector2(-4000, 1400)]: # big empty place
@@ -45,15 +49,22 @@ var event_type: EventType = EventType.DEPRESSION
 
 
 var event_canvas = CanvasLayer.new()
+var menu = preload("res://scenes/menu.tscn").instantiate()
 
 
 func _ready() -> void:
+	patient_marker.icon_texture = preload("res://assets/player/pointer_patient.png")
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = true
 	event_canvas.layer = 99
 	add_child(event_canvas)
+	add_child(menu)
+	player.can_move = false
+	
 
 
 func select_new_patient() -> void:
-	player.inside_car = false
+	player.can_move = true
 	if player.e:
 		player.e.visible = false
 	patient_marker.visible_override = 0
@@ -73,6 +84,31 @@ func select_new_patient() -> void:
 	event_type = randi() % 3
 
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("esc"):
+		print("esc pls")
+		if menu_visible:
+			hide_menu()
+		else:
+			show_menu()
+
+
+func show_menu():
+	menu.visible = true
+	menu_visible = true
+	menu.player.play("fade_in")
+	get_tree().paused = true
+
+
+func hide_menu():
+	menu_visible = false
+	menu.player.play_backwards("fade_in")
+	get_tree().paused = false
+	await get_tree().create_timer(0.3).timeout
+	menu.visible = false
+
+
+
 func get_random_poi() -> Vector2:
 	poi_index += 1
 	return poi_list[poi_index % poi_list.size()]
@@ -90,7 +126,7 @@ func set_sfx_volume(value: float) -> void:
 
 
 func do_event() -> void:
-	player.inside_car = true
+	player.can_move = false
 	patient_marker.visible_override = 2
 	var scene
 	match event_type:

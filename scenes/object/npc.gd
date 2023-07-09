@@ -1,6 +1,23 @@
 extends CharacterBody2D
 
 
+var bodies = [
+	preload("res://assets/player/npc_body1.png"),
+	preload("res://assets/player/npc_body2.png"),
+	preload("res://assets/player/npc_body3.png"),
+	preload("res://assets/player/npc_body4.png"),
+	preload("res://assets/player/npc_body5.png"),
+]
+var heads = [
+	preload("res://assets/player/npc_head1.png"),
+	preload("res://assets/player/npc_head2.png"),
+	preload("res://assets/player/npc_head3.png"),
+	preload("res://assets/player/npc_head4.png"),
+	preload("res://assets/player/npc_head5.png"),
+]
+
+
+
 var walk_speed: float = 200
 var turn_speed: float = 8
 
@@ -15,12 +32,14 @@ func _init() -> void:
 	global_position = Global.get_random_poi()
 
 func _ready() -> void:
+	agent.set_navigation_map(tilemap)
 	agent.max_speed = walk_speed
 	set_target(initial_target)
 	set_physics_process(false)
-	agent.set_navigation_map(tilemap)
 	await get_tree().create_timer(0.25).timeout
 	set_physics_process(true)
+	
+	randomize_apperance()
 
 
 func set_target(target_position: Vector2) -> void:
@@ -55,3 +74,11 @@ func _on_navigation_agent_2d_target_reached() -> void:
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
 	move_and_slide()
+
+
+func randomize_apperance():
+	randomize()
+	$Node2D/Body.texture = bodies.pick_random()
+	$Node2D/Head.texture = heads.pick_random()
+	bodies = []
+	heads = []

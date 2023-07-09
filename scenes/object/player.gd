@@ -11,6 +11,8 @@ var inside_car: bool = false
 
 var can_patient: bool = false
 
+var can_move: bool = true
+
 @onready var patient_area_shape = %PatientAreaShape
 @onready var world = get_parent()
 @onready var e = %E
@@ -22,7 +24,7 @@ func _init() -> void:
 func _physics_process(delta: float) -> void:
 #	look_at(get_global_mouse_position())
 	
-	if inside_car:
+	if inside_car or not can_move:
 		return
 	
 	var direction := Input.get_vector("left", "right", "forward", "back")
@@ -42,6 +44,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not can_move:
+		return
 	if can_patient and Input.is_action_just_pressed("e"):
 		can_patient = false
 		Global.do_event()
