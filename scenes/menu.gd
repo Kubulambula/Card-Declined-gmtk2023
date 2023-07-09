@@ -1,15 +1,6 @@
 extends CanvasLayer
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 
 func _on_play_pressed():
 	$Left/Main/AnimationPlay.play("card")
@@ -21,3 +12,10 @@ func _on_music_value_changed(value):
 
 func _on_sfx_value_changed(value):
 	Global.set_sfx_volume(value)
+
+
+func _on_quit_pressed() -> void:
+	$Left/Main/AnimationPlay.play("card")
+	if not OS.has_feature("web"):
+		await get_tree().create_timer(0.7).timeout
+		get_tree().quit()

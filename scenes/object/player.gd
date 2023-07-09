@@ -13,6 +13,7 @@ var can_patient: bool = false
 
 @onready var patient_area_shape = %PatientAreaShape
 @onready var world = get_parent()
+@onready var e = %E
 
 func _init() -> void:
 	Global.player = self
@@ -90,19 +91,27 @@ func get_out() -> void:
 
 func _on_car_door_area_area_entered(area: Area2D) -> void:
 	can_get_in_car = true
-
+	e.visible = true
 
 func _on_car_door_area_area_exited(area: Area2D) -> void:
 	can_get_in_car = false
+	e.visible = false
 
 
 func _on_patient_area_body_entered(body: Node2D) -> void:
 	if not body == Global.patient:
 		return
 	can_patient = true
+	e.visible = true
 
 
 func _on_patient_area_body_exited(body: Node2D) -> void:
 	if not body == Global.patient:
 		return
 	can_patient = false
+	e.visible = false
+
+
+func _process(delta: float) -> void:
+	e.global_rotation = 0
+	e.global_position = global_position + Vector2(0, -90)

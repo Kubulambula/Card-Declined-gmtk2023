@@ -53,6 +53,9 @@ func _ready() -> void:
 
 
 func select_new_patient() -> void:
+	player.inside_car = false
+	if player.e:
+		player.e.visible = false
 	patient_marker.visible_override = 0
 	player.can_patient = false
 	if patient:
@@ -87,6 +90,7 @@ func set_sfx_volume(value: float) -> void:
 
 
 func do_event() -> void:
+	player.inside_car = true
 	patient_marker.visible_override = 2
 	var scene
 	match event_type:
