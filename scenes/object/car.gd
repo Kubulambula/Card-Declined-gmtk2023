@@ -15,6 +15,8 @@ const OPENED = preload("res://assets/cars/ambulance_open.png")
 @onready var impact = %Impact
 @onready var weewoo = %WeeWoo
 @onready var siren = %Siren
+@onready var screech = %Screech
+@onready var impact_particle = %ImpactParticle
 
 var can_drive: bool = false:
 	set(value):
@@ -99,9 +101,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if is_drifting():
 		if not tirescreech.playing:
 			tirescreech.play()
+			screech.visible = true
 	else:
 		if tirescreech.playing:
 			tirescreech.stop()
+			screech.visible = false
 	
 	if notify_stop:
 		if linear_velocity.length() < 25 and angular_velocity < 0.05:
@@ -150,9 +154,13 @@ func _on_body_entered(body: Node) -> void:
 	if impact.playing or body == Global.player:
 		return
 	if last_linear_velocity.length() > 25 or abs(angular_velocity) > 0.2:
-		print("hit")
+#		print("hit")
 		impact.play()
+		impact_particle.emitting = true
 
 
 func _process(delta: float) -> void:
-	weewoo.position = get_global_transform_with_canvas().origin
+	var car_position_on_screen = get_global_transform_with_canvas().origin
+	weewoo.position = car_position_on_screen
+	impact_particle.position = car_position_on_screen
+#	screech.position = car_position_on_screen + Vector2(100, 100)

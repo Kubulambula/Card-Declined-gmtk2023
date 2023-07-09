@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://72an63mm5387"]
+[gd_scene load_steps=26 format=3 uid="uid://72an63mm5387"]
 
 [ext_resource type="Script" path="res://scenes/object/car.gd" id="1_7nlux"]
 [ext_resource type="Texture2D" uid="uid://besagdb62xwrf" path="res://assets/particles/tiremark.png" id="1_8atxf"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dsnchcy54lo" path="res://assets/particles/WOO.png" id="6_pk8fs"]
 [ext_resource type="AudioStream" uid="uid://dhwln5b5jr44w" path="res://assets/sound/door.wav" id="7_tk284"]
 [ext_resource type="AudioStream" uid="uid://ddrlgtub1fsx4" path="res://assets/sound/impact.wav" id="8_v31s8"]
+[ext_resource type="Texture2D" uid="uid://b4khs66crlrqr" path="res://assets/particles/THUMP.png" id="10_skl46"]
+[ext_resource type="Texture2D" uid="uid://syhy8dm8f3hr" path="res://assets/particles/SCREECH.png" id="12_4mfem"]
 
 [sub_resource type="Gradient" id="Gradient_okphn"]
 offsets = PackedFloat32Array(0, 0.722772, 1)
@@ -192,6 +194,49 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hqtk"]
 size = Vector2(75, 100)
 
+[sub_resource type="Curve" id="Curve_dshbu"]
+max_value = 0.5
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0952381, 0.489474), 0.0, 0.0, 0, 0, Vector2(0.866667, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Animation" id="Animation_vk4yv"]
+resource_name = "screech"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Screech/ScreechSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(-10, -10), Vector2(10, 10), Vector2(-10, -10), Vector2(10, 10), Vector2(-10, -10)]
+}
+
+[sub_resource type="Animation" id="Animation_xmdle"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Screech/ScreechSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3o48i"]
+_data = {
+"RESET": SubResource("Animation_xmdle"),
+"screech": SubResource("Animation_vk4yv")
+}
+
 [node name="Car" type="RigidBody2D"]
 gravity_scale = 0.0
 max_contacts_reported = 8
@@ -322,6 +367,19 @@ position = Vector2(-115, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
 
+[node name="ImpactParticle" type="CPUParticles2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(0, -47)
+emitting = false
+amount = 1
+lifetime = 0.4
+one_shot = true
+texture = ExtResource("10_skl46")
+gravity = Vector2(0, 0)
+angle_min = -25.0
+angle_max = 35.0
+scale_amount_curve = SubResource("Curve_dshbu")
+
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="CanvasLayer"]
 root_node = NodePath("../../Sprite2D")
 libraries = {
@@ -344,5 +402,20 @@ visible = false
 position = Vector2(127, 22)
 scale = Vector2(1, 1)
 texture = ExtResource("6_pk8fs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+autoplay = "screech"
+libraries = {
+"": SubResource("AnimationLibrary_3o48i")
+}
+
+[node name="Screech" type="Node2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(620, 360)
+rotation = -0.349066
+
+[node name="ScreechSprite" type="Sprite2D" parent="CanvasLayer/Screech"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_4mfem")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
