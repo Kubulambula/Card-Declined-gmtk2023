@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dx18uw7r3p8aa"]
+[gd_scene load_steps=60 format=3 uid="uid://dx18uw7r3p8aa"]
 
 [ext_resource type="Script" path="res://scenes/menu.gd" id="1_07ybj"]
 [ext_resource type="Texture2D" uid="uid://cq6jmtk2lv68a" path="res://assets/ui/menu_terminal.png" id="1_k3gf1"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://cw3wc8fc5sxwn" path="res://assets/ui/music.png" id="14_167e8"]
 [ext_resource type="FontFile" uid="uid://dhwcqfcbau6w6" path="res://assets/ui/Century Gothic.TTF" id="16_kbrqu"]
 [ext_resource type="Texture2D" uid="uid://2cae7hhylwok" path="res://assets/ui/music_hover.png" id="17_vj3fm"]
+[ext_resource type="Texture2D" uid="uid://dkm60pw4b1wuu" path="res://assets/player/characters_martina.png" id="23_k2rid"]
+[ext_resource type="Texture2D" uid="uid://bu0obikmv5xdx" path="res://assets/player/characters.png" id="24_npjpu"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ohmp"]
 _data = {
@@ -219,6 +221,106 @@ texture_margin_top = 25.0
 texture = ExtResource("12_ci1dp")
 texture_margin_top = 25.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_35mt3"]
+atlas = ExtResource("23_k2rid")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sg23g"]
+atlas = ExtResource("23_k2rid")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3twl"]
+atlas = ExtResource("23_k2rid")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me7vm"]
+atlas = ExtResource("23_k2rid")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vna3m"]
+atlas = ExtResource("23_k2rid")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwehd"]
+atlas = ExtResource("23_k2rid")
+region = Rect2(400, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqe3e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35mt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sg23g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3twl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_me7vm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vna3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwehd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnesr"]
+atlas = ExtResource("24_npjpu")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkkdi"]
+atlas = ExtResource("24_npjpu")
+region = Rect2(0, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2be2u"]
+atlas = ExtResource("24_npjpu")
+region = Rect2(0, 160, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxue1"]
+atlas = ExtResource("24_npjpu")
+region = Rect2(0, 240, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7c7u"]
+atlas = ExtResource("24_npjpu")
+region = Rect2(0, 320, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar0wp"]
+atlas = ExtResource("24_npjpu")
+region = Rect2(0, 400, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_82d1t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnesr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkkdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2be2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxue1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7c7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ar0wp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="Animation" id="Animation_dtrch"]
 resource_name = "intro_hide"
 length = 0.3
@@ -360,10 +462,10 @@ texture = ExtResource("6_5edgf")
 
 [node name="SFX" type="HSlider" parent="Right"]
 custom_minimum_size = Vector2(300, 0)
-offset_left = 780.0
-offset_top = 545.0
-offset_right = 1080.0
-offset_bottom = 585.0
+offset_left = 762.333
+offset_top = 394.0
+offset_right = 1062.33
+offset_bottom = 434.0
 theme_override_icons/grabber = ExtResource("11_4qoxb")
 theme_override_icons/grabber_highlight = ExtResource("13_rv2i7")
 theme_override_icons/grabber_disabled = ExtResource("11_4qoxb")
@@ -376,10 +478,10 @@ value = 0.6
 
 [node name="Music" type="HSlider" parent="Right"]
 custom_minimum_size = Vector2(300, 0)
-offset_left = 780.0
-offset_top = 500.0
-offset_right = 1080.0
-offset_bottom = 534.0
+offset_left = 762.333
+offset_top = 349.0
+offset_right = 1062.33
+offset_bottom = 383.0
 theme_override_icons/grabber = ExtResource("14_167e8")
 theme_override_icons/grabber_highlight = ExtResource("17_vj3fm")
 theme_override_icons/grabber_disabled = ExtResource("14_167e8")
@@ -391,24 +493,44 @@ step = 0.01
 value = 0.6
 
 [node name="Label" type="Label" parent="Right"]
-offset_left = 700.0
-offset_top = 500.0
-offset_right = 767.0
-offset_bottom = 534.0
+offset_left = 682.333
+offset_top = 349.0
+offset_right = 749.333
+offset_bottom = 383.0
 theme_override_fonts/font = ExtResource("16_kbrqu")
 theme_override_font_sizes/font_size = 24
 text = "Music
 "
 
 [node name="Label2" type="Label" parent="Right"]
-offset_left = 725.0
-offset_top = 550.0
-offset_right = 792.0
-offset_bottom = 584.0
+offset_left = 707.333
+offset_top = 399.0
+offset_right = 774.333
+offset_bottom = 433.0
 theme_override_fonts/font = ExtResource("16_kbrqu")
 theme_override_font_sizes/font_size = 24
 text = "SFX
 "
+
+[node name="Martina" type="AnimatedSprite2D" parent="Right"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(1090.33, 635)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_oqe3e")
+autoplay = "default"
+frame_progress = 0.527502
+flip_h = true
+
+[node name="Kuba" type="AnimatedSprite2D" parent="Right"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(1193.33, 637)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_82d1t")
+autoplay = "default"
+frame_progress = 0.306208
+flip_h = true
 
 [node name="AnimationPlayerIntroHide" type="AnimationPlayer" parent="."]
 libraries = {
