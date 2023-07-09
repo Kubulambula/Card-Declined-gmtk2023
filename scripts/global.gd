@@ -53,12 +53,14 @@ var menu = preload("res://scenes/menu.tscn").instantiate()
 
 
 func _ready() -> void:
+	patient_marker.icon_texture = preload("res://assets/player/pointer_patient.png")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().paused = true
 	event_canvas.layer = 99
 	add_child(event_canvas)
 	add_child(menu)
 	player.can_move = false
+	
 
 
 func select_new_patient() -> void:
@@ -92,6 +94,7 @@ func _input(event: InputEvent) -> void:
 
 
 func show_menu():
+	menu.visible = true
 	menu_visible = true
 	menu.player.play("fade_in")
 	get_tree().paused = true
@@ -101,6 +104,8 @@ func hide_menu():
 	menu_visible = false
 	menu.player.play_backwards("fade_in")
 	get_tree().paused = false
+	await get_tree().create_timer(0.3).timeout
+	menu.visible = false
 
 
 

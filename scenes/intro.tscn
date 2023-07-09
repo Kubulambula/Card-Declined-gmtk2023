@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmlag5l4alb0j"]
 
 [ext_resource type="Script" path="res://scenes/intro.gd" id="1_fxj67"]
-[ext_resource type="Texture2D" uid="uid://dxewsrfdbfnye" path="res://assets/events/intro/intro1.png" id="2_x86ih"]
+[ext_resource type="Texture2D" uid="uid://c6fdppokpk40q" path="res://assets/events/intro/intro1.png" id="2_x86ih"]
 [ext_resource type="FontFile" uid="uid://dhwcqfcbau6w6" path="res://assets/ui/Century Gothic.TTF" id="3_mj204"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sumv4"]

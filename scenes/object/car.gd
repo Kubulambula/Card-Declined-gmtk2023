@@ -21,10 +21,11 @@ var engine_max: float = 3
 @onready var screech = %Screech
 @onready var impact_particle = %ImpactParticle
 @onready var engine = %Engine
-
+@onready var tilemap: TileMap = get_parent().get_node_or_null("Ground")
 
 func _ready() -> void:
 	Global.music_player = %Radio
+	$NavigationAgent2D.set_navigation_map(tilemap)
 
 
 var can_drive: bool = false:

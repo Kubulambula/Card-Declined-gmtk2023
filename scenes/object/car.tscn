@@ -438,4 +438,9 @@ rotation = -0.349066
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("12_4mfem")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 180.0
+max_neighbors = 60
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
