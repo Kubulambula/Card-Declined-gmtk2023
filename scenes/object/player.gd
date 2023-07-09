@@ -11,6 +11,9 @@ var inside_car: bool = false
 
 var can_patient: bool = false
 
+
+@onready var notification_node = %Notification
+
 var can_move: bool = true
 
 @onready var patient_area_shape = %PatientAreaShape
@@ -19,6 +22,10 @@ var can_move: bool = true
 
 func _init() -> void:
 	Global.player = self
+
+func _ready() -> void:
+	await get_tree().create_timer(2).timeout
+	notification_node.add_to_queue("Get in the car and teach them a lesson. If you can't pay, don't go to the doctor!", 10)
 
 
 func _physics_process(delta: float) -> void:

@@ -1,6 +1,27 @@
 extends Node
 
 
+
+var depressed_lines = [
+	"That girl’s overdue on her therapy payments!",
+	"I diagnosed her as broke with past due payments. Get me my money!",
+	"That depression therapy wasn't for free!",
+	"Low self-esteem? She should have mentioned the low credit score!"
+]
+
+var arm_lines = [
+	"This guy’s prosthetic payments are past due! Get me that thing back.",
+	"That guy scammed us out of a prosthetic! Get him!",
+	"Well that arm would have come in handy if he had paid for it.",
+]
+
+var hair_lines = [
+	"Did you know, that barbers used to be doctors? Now do your reversed role stuff.",
+	"We gave this guy a haircut and he gave us fake money! Revenge us!",
+	"He went for a haircut with an empty wallet. Run after him!",
+]
+
+
 var depression = preload("res://scenes/events/depression.tscn")
 var arm = preload("res://scenes/events/arm.tscn")
 var hair = preload("res://scenes/events/hair.tscn")
@@ -53,9 +74,9 @@ var menu = preload("res://scenes/menu.tscn").instantiate()
 
 
 func _ready() -> void:
+	get_tree().paused = true
 	patient_marker.icon_texture = preload("res://assets/player/pointer_patient.png")
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	get_tree().paused = true
 	event_canvas.layer = 99
 	add_child(event_canvas)
 	add_child(menu)
@@ -82,6 +103,15 @@ func select_new_patient() -> void:
 	patient_marker.position = Vector2.ZERO
 	randomize()
 	event_type = randi() % 3
+	
+	await get_tree().create_timer(2.5).timeout
+	match event_type:
+		EventType.DEPRESSION:
+			player.notification_node.add_to_queue(depressed_lines.pick_random(), 7)
+		EventType.ARM:
+			player.notification_node.add_to_queue(arm_lines.pick_random(), 7)
+		EventType.HAIR:
+			player.notification_node.add_to_queue(hair_lines.pick_random(), 7)
 
 
 func _input(event: InputEvent) -> void:
