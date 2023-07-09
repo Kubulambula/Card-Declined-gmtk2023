@@ -2,6 +2,7 @@ extends Node
 
 
 const npc = preload("res://scenes/object/npc.tscn")
+var patient_marker = preload("res://scenes/object/off_screen_marker.tscn").instantiate()
 
 var map
 var player: Node = null
@@ -20,11 +21,25 @@ var poi_list: Array[Vector2] = [Vector2(-4000, 1400)]: # big empty place
 		for i in npc_list.size():
 			npc_list[i].initial_target = poi_list[i % poi_list.size()]
 		randomize()
+		select_new_patient()
 
 var npc_list: Array[Node] = []
 var music_player: AudioStreamPlayer = null
 
 var poi_index: int = 0
+
+var patient = null
+
+
+func select_new_patient() -> void:
+	var new_patient = npc_list.pick_random()
+	while new_patient == patient:
+		new_patient = npc_list.pick_random()
+	patient = new_patient
+	if patient_marker.get_parent():
+		patient_marker.get_parent().remove_child(patient_marker)
+	patient.add_child(patient_marker)
+	patient_marker.position = Vector2.ZERO
 
 
 func get_random_poi() -> Vector2:

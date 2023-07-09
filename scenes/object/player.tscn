@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dx7abmjmrkhuu"]
+[gd_scene load_steps=12 format=3 uid="uid://dx7abmjmrkhuu"]
 
 [ext_resource type="Script" path="res://scenes/object/player.gd" id="1_0dm0g"]
 [ext_resource type="Texture2D" uid="uid://dl75g3cjii4je" path="res://assets/cars/light.png" id="1_iry73"]
@@ -98,6 +98,9 @@ _data = {
 "walking": SubResource("Animation_2wk8n")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1sxyj"]
+radius = 150.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_0dm0g")
 
@@ -150,5 +153,16 @@ libraries = {
 "": SubResource("AnimationLibrary_h6dx6")
 }
 
+[node name="PatientArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="PatientAreaShape" type="CollisionShape2D" parent="PatientArea"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_1sxyj")
+
 [connection signal="area_entered" from="CarDoorArea" to="." method="_on_car_door_area_area_entered"]
 [connection signal="area_exited" from="CarDoorArea" to="." method="_on_car_door_area_area_exited"]
+[connection signal="body_entered" from="PatientArea" to="." method="_on_patient_area_body_entered"]
+[connection signal="body_exited" from="PatientArea" to="." method="_on_patient_area_body_exited"]

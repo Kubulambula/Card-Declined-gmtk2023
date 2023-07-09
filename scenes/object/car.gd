@@ -60,7 +60,7 @@ var input: Vector2 = Vector2.ZERO
 func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("ui_page_down"):
-		engine.pitch_scale = 2
+		Global.select_new_patient()
 	
 	if not can_drive:
 		return

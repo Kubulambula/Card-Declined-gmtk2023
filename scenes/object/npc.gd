@@ -28,6 +28,8 @@ func set_target(target_position: Vector2) -> void:
 
 
 func _physics_process(delta: float) -> void:
+#	if (global_position - Global.player.global_position).length() > 2000:
+#		return
 #	set_target(get_global_mouse_position())
 	if agent.distance_to_target() > 100:
 		var next_path_position: Vector2 = agent.get_next_path_position()

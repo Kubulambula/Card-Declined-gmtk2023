@@ -9,6 +9,7 @@ var friction = 2500
 var can_get_in_car: bool = false
 var inside_car: bool = false
 
+@onready var patient_area_shape = %PatientAreaShape
 @onready var world = get_parent()
 
 func _init() -> void:
@@ -53,6 +54,7 @@ func get_in() -> void:
 	position = Vector2.ZERO
 	
 	inside_car = true
+	patient_area_shape.set_deferred("disabled", true)
 	visible = false
 #	await get_tree().create_timer(0.2).timeout
 	area.get_parent().can_drive = true
@@ -71,6 +73,7 @@ func get_out() -> void:
 	set_deferred("global_position", area.get_node("GetOutPosition").global_position)
 	
 	inside_car = false
+	patient_area_shape.set_deferred("disabled", false)
 	visible = true
 	$CollisionShape2D.set_deferred("disabled", false)
 	
@@ -85,3 +88,14 @@ func _on_car_door_area_area_entered(area: Area2D) -> void:
 
 func _on_car_door_area_area_exited(area: Area2D) -> void:
 	can_get_in_car = false
+
+
+func _on_patient_area_body_entered(body: Node2D) -> void:
+	if not body == Global.patient:
+		return
+	print("patient found")
+
+
+func _on_patient_area_body_exited(body: Node2D) -> void:
+	if not body == Global.patient:
+		return
