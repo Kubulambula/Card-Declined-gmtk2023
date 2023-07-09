@@ -100,6 +100,10 @@ script = ExtResource("1_mw1jx")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
+avoidance_enabled = true
+radius = 30.0
+max_neighbors = 60
+time_horizon_agents = 2.0
 debug_enabled = true
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -134,3 +138,4 @@ libraries = {
 shape = SubResource("CircleShape2D_pqe24")
 
 [connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

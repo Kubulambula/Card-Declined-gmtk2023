@@ -1,11 +1,25 @@
 extends Node
 
+
+const npc = preload("res://scenes/object/npc.tscn")
+
+var map
 var player: Node = null
 var poi_list: Array[Vector2] = [Vector2(-4000, 1400)]: # big empty place
 	set(value):
-		randomize()
-		value.shuffle()
 		poi_list = value
+		
+		for poi in poi_list:
+			var n = npc.instantiate()
+			map.add_child.call_deferred(n)
+			n.global_position = poi
+			npc_list.append(n)
+		
+		randomize()
+		poi_list.shuffle()
+		for i in npc_list.size():
+			npc_list[i].initial_target = poi_list[i % poi_list.size()]
+		randomize()
 
 var npc_list: Array[Node] = []
 var music_player: AudioStreamPlayer = null
