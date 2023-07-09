@@ -1,0 +1,186 @@
+[gd_scene load_steps=15 format=3 uid="uid://b67784h65gmgw"]
+
+[ext_resource type="Script" path="res://scenes/events/hair.gd" id="1_n5vif"]
+[ext_resource type="Texture2D" uid="uid://du7xy47da4jet" path="res://assets/events/hair_1.png" id="2_f5kt7"]
+[ext_resource type="Texture2D" uid="uid://6ul3i34l546b" path="res://assets/events/hair2.png" id="3_8l2wn"]
+[ext_resource type="Texture2D" uid="uid://cfs0f5tmqifhu" path="res://assets/events/a.png" id="4_k5tlj"]
+[ext_resource type="Texture2D" uid="uid://cpmlypc101818" path="res://assets/events/d.png" id="5_qgr53"]
+[ext_resource type="Texture2D" uid="uid://oaupkcvidifl" path="res://assets/events/s.png" id="6_b7ae5"]
+[ext_resource type="Texture2D" uid="uid://28srjn2hjb2q" path="res://assets/events/q.png" id="7_o87ax"]
+[ext_resource type="Texture2D" uid="uid://tssdwjjtpolg" path="res://assets/events/w.png" id="8_64d2q"]
+[ext_resource type="Texture2D" uid="uid://c4b5y2cmxlu1x" path="res://assets/events/e.png" id="9_84r82"]
+
+[sub_resource type="Animation" id="Animation_5te4p"]
+resource_name = "0"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 800), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_noqdc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_cqr8t"]
+resource_name = "1"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.02, 0.03, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(50, 10), Vector2(-10, -2), Vector2(15, 9), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fiosa"]
+resource_name = "2"
+length = 0.85
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.02, 0.03, 0.1, 0.75, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(50, 10), Vector2(-10, -2), Vector2(15, 9), Vector2(0, 0), Vector2(0, 0), Vector2(0, 800)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8qdr"]
+_data = {
+"0": SubResource("Animation_5te4p"),
+"1": SubResource("Animation_cqr8t"),
+"2": SubResource("Animation_fiosa"),
+"RESET": SubResource("Animation_noqdc")
+}
+
+[node name="Hair" type="Node2D"]
+script = ExtResource("1_n5vif")
+
+[node name="Hair1" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_f5kt7")
+centered = false
+offset = Vector2(-80, -25)
+
+[node name="Hair2" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_8l2wn")
+centered = false
+offset = Vector2(-80, -25)
+
+[node name="Key1" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(146, 388)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_k5tlj")
+
+[node name="Key2" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(1128, 430)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_qgr53")
+
+[node name="Key3" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(1013, 330)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_b7ae5")
+
+[node name="Key4" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(241, 157)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_o87ax")
+
+[node name="Key5" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(484, 121)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_64d2q")
+
+[node name="Key6" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(983, 124)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_84r82")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "0"
+libraries = {
+"": SubResource("AnimationLibrary_g8qdr")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

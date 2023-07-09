@@ -8,6 +8,7 @@ extends Node2D
 @onready var icon: Sprite2D = %Icon
 
 var hide_on_screen: bool = true
+var visible_override: int = 0
 
 
 func _ready() -> void:
@@ -26,6 +27,10 @@ func _process(delta: float) -> void:
 
 func set_marker_position(bounds: Rect2) -> void:
 	marker.visible = !bounds.has_point(global_position) or !hide_on_screen
+	
+	if visible_override != 0:
+		marker.visible = true if visible_override == 1 else false
+	
 	if not marker.visible:
 		return
 	
