@@ -1,4 +1,120 @@
-[gd_scene format=3 uid="uid://bmsg7ifimdshr"]
+[gd_scene load_steps=10 format=3 uid="uid://dx18uw7r3p8aa"]
+
+[ext_resource type="Texture2D" uid="uid://cq6jmtk2lv68a" path="res://assets/ui/menu_terminal.png" id="1_k3gf1"]
+[ext_resource type="Texture2D" uid="uid://dsex85ooo34ry" path="res://assets/ui/play.png" id="2_q1w5a"]
+[ext_resource type="Texture2D" uid="uid://col12ve7xehda" path="res://assets/ui/quit.png" id="3_yphfk"]
+[ext_resource type="Texture2D" uid="uid://byw3r5nc831bk" path="res://assets/ui/beep.png" id="4_dajai"]
+[ext_resource type="Texture2D" uid="uid://2dbvf1eua3e7" path="res://assets/ui/card.png" id="5_4u1uq"]
+[ext_resource type="Texture2D" uid="uid://brd0nsfe6y56o" path="res://assets/ui/logo.png" id="6_5edgf"]
+
+[sub_resource type="Animation" id="Animation_i27xg"]
+resource_name = "card"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Extra/Card:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Extra/Card:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(358, -206), Vector2(358, -206), Vector2(314, 836)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Extra/Beep:visible")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Extra/Beep:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(476, 226), Vector2(485, 211), Vector2(476, 226)]
+}
+
+[sub_resource type="Animation" id="Animation_7xxn2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Extra/Card:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Extra/Card:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(358, -206)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Extra/Beep:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Extra/Beep:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(476, 226)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s64a2"]
+_data = {
+"RESET": SubResource("Animation_7xxn2"),
+"card": SubResource("Animation_i27xg")
+}
 
 [node name="Menu" type="CanvasLayer"]
 
@@ -8,11 +124,60 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.196078)
+color = Color(0.113725, 0.160784, 0.4, 0.258824)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = 53.0
 offset_top = 64.0
 offset_right = 363.0
 offset_bottom = 90.0
 text = "Card Declined (Is it a good name name?)"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s64a2")
+}
+
+[node name="Main" type="Node2D" parent="."]
+
+[node name="MenuTerminal" type="Sprite2D" parent="Main"]
+position = Vector2(216, 355)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_k3gf1")
+
+[node name="Play" type="Sprite2D" parent="Main"]
+position = Vector2(213, 277)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_q1w5a")
+
+[node name="Quit" type="Sprite2D" parent="Main"]
+position = Vector2(216, 406)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_yphfk")
+
+[node name="Extra" type="Node2D" parent="."]
+
+[node name="Beep" type="Sprite2D" parent="Extra"]
+visible = false
+position = Vector2(476, 226)
+rotation = 0.282743
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_dajai")
+
+[node name="Card" type="Sprite2D" parent="Extra"]
+visible = false
+position = Vector2(358, -206)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_4u1uq")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(810, 194)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_5edgf")
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 558.0
+offset_top = 418.0
+offset_right = 566.0
+offset_bottom = 434.0
