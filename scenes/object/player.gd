@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var max_speed = 400.0
+var max_speed = 450.0
 var turn_speed = 10
 var acceleration = 4000
 var friction = 2500
@@ -25,7 +25,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	await get_tree().create_timer(2).timeout
-	notification_node.add_to_queue("Get in the car and teach them a lesson. If you can't pay, don't go to the doctor!", 15)
+	notification_node.add_to_queue("Get in the car and teach them a lesson. If you can't pay, don't go to the doctor!", 18)
 
 
 func _physics_process(delta: float) -> void:

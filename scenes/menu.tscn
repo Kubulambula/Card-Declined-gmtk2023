@@ -321,6 +321,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_4etwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/IntroHide:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.25098, 0.262745, 0.32549, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_dtrch"]
 resource_name = "intro_hide"
 length = 0.3
@@ -335,21 +350,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.25098, 0.262745, 0.32549, 1), Color(0.25098, 0.262745, 0.32549, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4etwh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/IntroHide:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.25098, 0.262745, 0.32549, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gxlvr"]
@@ -519,7 +519,7 @@ position = Vector2(1090.33, 635)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_oqe3e")
 autoplay = "default"
-frame_progress = 0.527502
+frame_progress = 0.234826
 flip_h = true
 
 [node name="Kuba" type="AnimatedSprite2D" parent="Right"]
@@ -529,7 +529,7 @@ position = Vector2(1193.33, 637)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_82d1t")
 autoplay = "default"
-frame_progress = 0.306208
+frame_progress = 0.0135328
 flip_h = true
 
 [node name="AnimationPlayerIntroHide" type="AnimationPlayer" parent="."]

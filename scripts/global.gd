@@ -6,19 +6,24 @@ var depressed_lines = [
 	"That girl’s overdue on her therapy payments!",
 	"I diagnosed her as broke with past due payments. Get me my money!",
 	"That depression therapy wasn't for free!",
-	"Low self-esteem? She should have mentioned the low credit score!"
+	"Low self-esteem? She should have mentioned the low credit score!",
+	"Worried about fat shaming? You better worry about those fat stacks!",
 ]
 
 var arm_lines = [
 	"This guy’s prosthetic payments are past due! Get me that thing back.",
 	"That guy scammed us out of a prosthetic! Get him!",
 	"Well that arm would have come in handy if he had paid for it.",
+	"I hope that guy's right handed.",
+	"He's lucky that it doesn't cost an arm AND a leg.",
 ]
 
 var hair_lines = [
 	"Did you know, that barbers used to be doctors? Now do your reversed role stuff.",
 	"We gave this guy a haircut and he gave us fake money! Revenge us!",
 	"He went for a haircut with an empty wallet. Run after him!",
+	"Honestly, you might be doing him a favor with that new hair.",
+	"I cut his hair and he cut my paycheck?!",
 ]
 
 
